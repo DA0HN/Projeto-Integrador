@@ -1,26 +1,23 @@
-package br.edu.ifmt.cba.application;
+package br.edu.ifmt.cba.gui.view;
 
 import java.io.IOException;
 
+import br.edu.ifmt.cba.gui.enums.Path;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Disciplinas extends Application {
+public class ListarDisciplinas extends Application {
 	private static Stage stage;
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
 	
 	@Override public void start(Stage stage) {
 		try {
 			setStage(stage);
-			Parent root = FXMLLoader.load(getClass().getResource("../view/AnchorPaneDisciplinas.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource(Path.LISTAR_DISCIPLINAS.getValue()));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("../style/modena_dark.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource(Path.STYLE.getValue()).toExternalForm());
 			stage.show();
 		}
 		catch(IOException e) {
@@ -32,6 +29,6 @@ public class Disciplinas extends Application {
 		return stage;
 	}
 	public static void setStage(Stage stage) {
-		Disciplinas.stage = stage;
+		ListarDisciplinas.stage = stage;
 	}
 }

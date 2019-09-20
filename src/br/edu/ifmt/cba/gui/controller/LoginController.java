@@ -1,10 +1,10 @@
-package br.edu.ifmt.cba.controller;
+package br.edu.ifmt.cba.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.edu.ifmt.cba.application.Login;
-import br.edu.ifmt.cba.application.Principal;
+import br.edu.ifmt.cba.gui.view.Login;
+import br.edu.ifmt.cba.gui.view.Principal;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;

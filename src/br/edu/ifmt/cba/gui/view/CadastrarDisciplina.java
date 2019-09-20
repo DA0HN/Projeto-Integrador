@@ -1,5 +1,6 @@
-package br.edu.ifmt.cba.application;
+package br.edu.ifmt.cba.gui.view;
 
+import br.edu.ifmt.cba.gui.enums.Path;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,9 +14,9 @@ public class CadastrarDisciplina extends Application {
 	@Override public void start(Stage stage) {
 		try {
 			this.setStage(stage);
-			Parent root = FXMLLoader.load(getClass().getResource("../view/AnchorPaneCadastrarDisciplinas.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource(Path.CADASTRAR_DISCIPLINAS.getValue()));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("../style/modena_dark.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource(Path.STYLE.getValue()).toExternalForm());
 			stage.setTitle("Cadastrar nova Disciplina");
 			stage.setScene(scene);
 			stage.setResizable(false);
@@ -32,10 +33,6 @@ public class CadastrarDisciplina extends Application {
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
-	}
-	
-	public static void main(String[] args) {
-		launch(args);
 	}
 
 }

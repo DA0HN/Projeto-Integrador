@@ -1,7 +1,8 @@
-package br.edu.ifmt.cba.application;
+package br.edu.ifmt.cba.gui.view;
 	
 import java.io.IOException;
 
+import br.edu.ifmt.cba.gui.enums.Path;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,17 +12,13 @@ import javafx.stage.Stage;
 public class Login extends Application {
 	
 	private static Stage stage;
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
-	
+
 	@Override public void start(Stage stage) {
 		try {
 			
-			Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource(Path.LOGIN.getValue()));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("../style/modena_dark.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource(Path.STYLE.getValue()).toExternalForm());
 			stage.setTitle("Login");
 			stage.setScene(scene);
 			stage.setResizable(false);

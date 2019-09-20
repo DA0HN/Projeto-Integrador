@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.controller;
+package br.edu.ifmt.cba.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class DisciplinasController implements Initializable {	
+public class ListarDisciplinasController implements Initializable {	
     
     @FXML private TableView<Disciplina> tableDisciplinas;
     @FXML private TableColumn<Disciplina, String> columnDisciplina;

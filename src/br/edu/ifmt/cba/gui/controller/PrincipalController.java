@@ -1,11 +1,14 @@
-package br.edu.ifmt.cba.controller;
+package br.edu.ifmt.cba.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.edu.ifmt.cba.application.Login;
-import br.edu.ifmt.cba.application.Principal;
+import br.edu.ifmt.cba.gui.enums.Path;
+import br.edu.ifmt.cba.gui.exceptions.ViewException;
+import br.edu.ifmt.cba.gui.view.Login;
+import br.edu.ifmt.cba.gui.view.Principal;
+import br.edu.ifmt.cba.gui.view.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,44 +24,43 @@ public class PrincipalController implements Initializable{
     @FXML private Button btHorarios;
     @FXML private Button btCadastrarDisciplina; 
     
-    @FXML private AnchorPane anchorPanePrincipal;
+    @FXML private AnchorPane principalController;
    
-    @Override public void initialize(URL arg0, ResourceBundle arg1) {
-    	
-	}
 	
     @FXML public void handleButtonDisciplina() {
-    	trocarAnchorPane("../view/AnchorPaneDisciplinas.fxml");
+    	trocarAnchorPane(Path.LISTAR_DISCIPLINAS.getValue());
     }
     
     @FXML public void handleButtonNotas() {
-	   trocarAnchorPane("../view/AnchorPaneNotas.fxml");
+	   trocarAnchorPane(Path.NOTAS.getValue());
     }
     
     @FXML public void handleButtonCadastrarDisciplina() {
-    	trocarAnchorPane("../view/AnchorPaneCadastrarDisciplinas.fxml");
+    	trocarAnchorPane(Path.CADASTRAR_DISCIPLINAS.getValue());
     }
     
     @FXML public void handleButtonHorarios() {
-    	trocarAnchorPane("../view/AnchorPaneHorarios.fxml");
+    	trocarAnchorPane(Path.HORARIOS.getValue());
     }
     
     public void trocarAnchorPane(String str) {
     	try {
 			AnchorPane newAnchorPane = (AnchorPane) FXMLLoader.load(getClass().getResource(str));
-			anchorPanePrincipal.getChildren().setAll(newAnchorPane);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			principalController.getChildren().setAll(newAnchorPane);
+		} catch (IOException e) {
+			throw new ViewException( e.getMessage() );
 		}
     }
     
     public void handleButtonTrocarUsuario() {
-    	Login login = new Login();
+    	Login login = ViewFactory.createLogin();
     	login.start(new Stage());
     	fecha();
     }
     public static void fecha() {
     	Principal.getStage().close();
     }
+    
+    @Override public void initialize(URL arg0, ResourceBundle arg1) {}
     
 }

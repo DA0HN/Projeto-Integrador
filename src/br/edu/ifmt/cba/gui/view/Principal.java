@@ -1,7 +1,8 @@
-package br.edu.ifmt.cba.application;
+package br.edu.ifmt.cba.gui.view;
 
 import java.io.IOException;
 
+import br.edu.ifmt.cba.gui.enums.Path;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,16 +13,12 @@ public class Principal extends Application{
 	
 	private static Stage stage;
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 	@Override public void start(Stage stage) {
 		try {
 			setStage(stage);
-			Parent root = FXMLLoader.load(getClass().getResource("../view/Principal.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource(Path.PRINCIPAL.getValue()));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("../style/modena_dark.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource(Path.STYLE.getValue()).toExternalForm());
 			stage.setTitle("Principal");
 			stage.setResizable(false);
 			stage.setScene(scene);

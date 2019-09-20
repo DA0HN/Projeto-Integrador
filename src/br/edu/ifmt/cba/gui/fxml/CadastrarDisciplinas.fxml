@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="txNomeDisciplina" prefHeight="462.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.controller.CadastrarDisciplinaController">
+<AnchorPane fx:id="txNomeDisciplina" prefHeight="462.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.gui.controller.CadastrarDisciplinaController">
    <children>
       <GridPane alignment="CENTER" layoutX="197.0" layoutY="170.0" prefHeight="122.0" prefWidth="308.0" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="197.0" AnchorPane.topAnchor="170.0">
         <columnConstraints>

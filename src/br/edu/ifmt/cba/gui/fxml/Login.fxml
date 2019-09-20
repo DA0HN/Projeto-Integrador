@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="300.0" prefHeight="347.0" prefWidth="327.0" styleClass="about-button" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.controller.LoginController">
+<AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="300.0" prefHeight="347.0" prefWidth="327.0" styleClass="about-button" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.gui.controller.LoginController">
    <children>
       <TextField fx:id="txEmail" layoutX="56.0" layoutY="105.0" prefHeight="25.0" prefWidth="214.0" promptText="Email" />
       <PasswordField fx:id="txSenha" layoutX="56.0" layoutY="161.0" prefHeight="25.0" prefWidth="214.0" promptText="Senha" />

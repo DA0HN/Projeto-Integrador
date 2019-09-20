@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.controller;
+package br.edu.ifmt.cba.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
