@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.controller.PrincipalController">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER_LEFT">
+        <items>
+          <Button fx:id="btDisciplina" mnemonicParsing="false" onAction="#handleButtonDisciplina" text="Disciplinas" />
+            <Button fx:id="btNotas" mnemonicParsing="false" onAction="#handleButtonNotas" text="Notas" />
+            <Button fx:id="btHorarios" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonHorarios" text="Horarios" />
+            <Button fx:id="btCadastrarDisciplina" mnemonicParsing="false" onAction="#handleButtonCadastrarDisciplina" text="Cadastrar nova disciplina" />
+            <Separator prefHeight="30.0" prefWidth="240.0" />
+            <Button fx:id="btTrocarUsuario" mnemonicParsing="false" onAction="#handleButtonTrocarUsuario" text="trocar usuario" />
+        </items>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </ToolBar>
+   </top>
+   <left>
+      <AnchorPane fx:id="anchorPanePrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="702.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

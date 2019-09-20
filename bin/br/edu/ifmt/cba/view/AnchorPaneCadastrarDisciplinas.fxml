@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane fx:id="txNomeDisciplina" prefHeight="462.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.controller.CadastrarDisciplinaController">
+   <children>
+      <GridPane alignment="CENTER" layoutX="197.0" layoutY="170.0" prefHeight="122.0" prefWidth="308.0" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="197.0" AnchorPane.topAnchor="170.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="110.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="198.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" text="Nome da disciplina" />
+            <TextField fx:id="nomeDisciplina" onKeyPressed="#nomeDisciplinaOnKeyPressed" onMouseClicked="#nomeDisciplinaOnClicked" promptText="Matemática" GridPane.columnIndex="1" />
+            <Label alignment="CENTER" text="Nome do professor" GridPane.rowIndex="1" />
+            <TextField fx:id="nomeProfessor" onKeyPressed="#nomeProfessorOnKeyPressed" promptText="Gabriel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Button fx:id="btCadastrar" layoutX="453.0" layoutY="377.0" mnemonicParsing="false" onKeyPressed="#btCadastrarOnKeyPressed" onMouseClicked="#btCadastrarOnClicked" text="Cadastrar" />
+   </children>
+</AnchorPane>
