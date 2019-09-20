@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.db;
+package br.edu.ifmt.cba.database;
 
 import java.io.FileInputStream;
 import java.io.IOException;

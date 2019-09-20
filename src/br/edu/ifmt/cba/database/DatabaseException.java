@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.db;
+package br.edu.ifmt.cba.database;
 
 public class DatabaseException extends RuntimeException {
 
