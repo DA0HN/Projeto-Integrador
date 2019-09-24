@@ -2,6 +2,7 @@ package br.edu.ifmt.cba.agenda.model.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,10 +17,10 @@ public class DisciplinaService implements DisciplinaDao {
 		
 		SAVE("insert into disciplina (nome, professor) values (?, ?)"),
 		UPDATE("update disciplina (nome, professor) where id = ?"),
-		DELETE_BY_ID(""),
-		FIND_BY_ID(""),
-		FIND_BY_NOME(""),
-		FIND_ALL("");
+		DELETE_BY_ID("delete disciplina where id = ?"),
+		FIND_BY_ID("select * from disciplina where id = ?"),
+		FIND_BY_NOME("select * from disciplina where nome = ?"),
+		FIND_ALL("select * from disciplina");
 		
 		private String value;
 		
@@ -119,8 +120,11 @@ public class DisciplinaService implements DisciplinaDao {
 		}
 	}
 	
-	protected Disciplina instanciarDisciplina() {
-		
+	protected Disciplina instanciarDisciplina(ResultSet rs) throws SQLException {
+		var disciplina = new Disciplina();
+		disciplina.setNome(rs.getString("nome"));
+		disciplina.setProfessor(rs.getString("professor"));
+		return disciplina;
 	}
 
 }
