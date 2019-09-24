@@ -12,5 +12,5 @@ public interface DisciplinaDao {
 	Disciplina findById(Integer id);
 	Disciplina findByNome(String Nome);
 	List<Disciplina> findAll();
-	
+
 }

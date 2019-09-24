@@ -1,17 +1,21 @@
 package br.edu.ifmt.cba.agenda.model.service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
+import br.edu.ifmt.cba.agenda.database.Database;
+import br.edu.ifmt.cba.agenda.database.DatabaseException;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.repository.DisciplinaDao;
 
 public class DisciplinaService implements DisciplinaDao {
 
-	private enum DisciplinaSQL {
+	protected enum DisciplinaSQL {
 		
-		SAVE(""),
-		UPDATE(""),
+		SAVE("insert into disciplina (nome, professor) values (?, ?)"),
+		UPDATE("update disciplina (nome, professor) where id = ?"),
 		DELETE_BY_ID(""),
 		FIND_BY_ID(""),
 		FIND_BY_NOME(""),
@@ -35,27 +39,88 @@ public class DisciplinaService implements DisciplinaDao {
 	}
 
 	@Override public void save(Disciplina d) {
-
+		PreparedStatement st = null;
+		try {
+			
+		}
+		catch( SQLException e) {
+			throw new DatabaseException("Erro ao executar SAVE -> " + e.getMessage() );
+		}
+		finally{
+			Database.closeStatement(st);
+		}
 	}
 
 	@Override public void update(Disciplina d) {
-
+		PreparedStatement st = null;
+		try {
+			
+		}
+		catch( SQLException e) {
+			throw new DatabaseException("Erro ao executar SAVE -> " + e.getMessage() );
+		}
+		finally{
+			Database.closeStatement(st);
+		}
 	}
 
 	@Override public void deleteById(Integer id) {
-
+		PreparedStatement st = null;
+		try {
+			
+		}
+		catch( SQLException e) {
+			throw new DatabaseException("Erro ao executar SAVE -> " + e.getMessage() );
+		}
+		finally{
+			Database.closeStatement(st);
+		}
 	}
 
 	@Override public Disciplina findById(Integer id) {
-		return null;
+		PreparedStatement st = null;
+		try {
+			
+			return null;
+		}
+		catch( SQLException e) {
+			throw new DatabaseException("Erro ao executar SAVE -> " + e.getMessage() );
+		}
+		finally{
+			Database.closeStatement(st);
+		}
 	}
 
 	@Override public Disciplina findByNome(String Nome) {
-		return null;
+		PreparedStatement st = null;
+		try {
+			
+			return null;
+		}
+		catch( SQLException e) {
+			throw new DatabaseException("Erro ao executar SAVE -> " + e.getMessage() );
+		}
+		finally{
+			Database.closeStatement(st);
+		}
 	}
 
 	@Override public List<Disciplina> findAll() {
-		return null;
+		PreparedStatement st = null;
+		try {
+			
+			return null;
+		}
+		catch( SQLException e) {
+			throw new DatabaseException("Erro ao executar SAVE -> " + e.getMessage() );
+		}
+		finally{
+			Database.closeStatement(st);
+		}
+	}
+	
+	protected Disciplina instanciarDisciplina() {
+		
 	}
 
 }

@@ -14,6 +14,8 @@ public class Aluno {
 	
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	
+	public Aluno() {}
+	
 	public Aluno(Integer id, String nome, String matricula, String senha, String email, List<Disciplina> disciplinas) {
 		this.id = id;
 		this.nome = nome;
