@@ -11,10 +11,31 @@ import br.edu.ifmt.cba.agenda.database.Database;
 import br.edu.ifmt.cba.agenda.database.DatabaseException;
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.repository.AlunoDao;
-import br.edu.ifmt.cba.agenda.model.repository.enums.AlunoSQL;
 
 public class AlunoService implements AlunoDao {
 
+	private enum AlunoSQL {
+
+		SAVE("insert into aluno (nome, matricula, senha, email) values (?, ?, ?, ?)"),
+		UPDATE("update aluno set nome=?, matricula=?, email=? where id=?"),
+		DELETE_BY_ID(""),
+		DELETE_BY_LOGIN(""),
+		FIND_BY_ID(""),
+		FIND_BY_MATRICULA(""),
+		FIND_BY_LOGIN(""),
+		FIND_ALL("");
+
+		private String value;
+
+		AlunoSQL(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return value;
+		}
+	}
+	
 	private Connection conexao;
 	
 	public AlunoService(Connection conexao) {
@@ -44,7 +65,7 @@ public class AlunoService implements AlunoDao {
 			}
 		}
 		catch( SQLException e) {
-			throw new DatabaseException("Erro ao executar o SAVE -> " + e.getMessage() );
+			throw new DatabaseException("Erro ao executar SAVE -> " + e.getMessage() );
 		}
 		finally {
 			Database.closeStatement(st);
@@ -52,7 +73,23 @@ public class AlunoService implements AlunoDao {
 	}
 
 	@Override public void update(Aluno aluno) {
-
+		PreparedStatement st = null;
+		try {
+			st = conexao.prepareStatement(AlunoSQL.UPDATE.getValue());
+			st.setString(1, aluno.getNome());
+			st.setString(2, aluno.getMatricula());
+			st.setString(3, aluno.getEmail());
+			st.setInt(4, aluno.getId());
+			
+			st.executeUpdate();
+			
+		}
+		catch( SQLException e) {
+			throw new DatabaseException("Erro ao executar UPDATE -> " + e.getMessage());
+		}
+		finally {
+			Database.closeStatement(st);
+		}
 	}
 
 	@Override public void deleteById(Integer id) {

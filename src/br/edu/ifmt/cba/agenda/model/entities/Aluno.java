@@ -22,7 +22,16 @@ public class Aluno {
 		this.email = email;
 		this.disciplinas = disciplinas;
 	}
+	
+	public Aluno(Integer id, String nome, String matricula, String senha, String email) {
+		this.id = id;
+		this.nome = nome;
+		this.matricula = matricula;
+		this.senha = senha;
+		this.email = email;
+	}
 
+	
 	public Aluno(String nome, String matricula, String senha, String email) {
 		this.nome = nome;
 		this.matricula = matricula;
