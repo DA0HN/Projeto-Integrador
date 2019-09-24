@@ -6,8 +6,8 @@ import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 
 public interface AlunoDao {
 	
-	void save(Aluno a);
-	void update(Aluno a);
+	void save(Aluno aluno);
+	void update(Aluno aluno);
 	void deleteById(Integer id);
 	void deleteByLogin(String login);
 	Aluno findById(Integer id);
