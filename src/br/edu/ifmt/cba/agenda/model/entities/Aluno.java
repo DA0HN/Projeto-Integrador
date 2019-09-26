@@ -11,19 +11,10 @@ public class Aluno {
 	private String matricula;
 	private String senha;
 	private String email;
-	
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	
-	public Aluno() {}
 	
-	public Aluno(Integer id, String nome, String matricula, String senha, String email, List<Disciplina> disciplinas) {
-		this.id = id;
-		this.nome = nome;
-		this.matricula = matricula;
-		this.senha = senha;
-		this.email = email;
-		this.disciplinas = disciplinas;
-	}
+	public Aluno() {}
 	
 	public Aluno(Integer id, String nome, String matricula, String senha, String email) {
 		this.id = id;
@@ -41,16 +32,20 @@ public class Aluno {
 		this.email = email;
 	}
 
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
 	public Integer getId() {
 		return id;
 	}
 	
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
 	}
 
 	public String getEmail() {
