@@ -3,6 +3,8 @@ package br.edu.ifmt.cba.agenda.model.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
+
 public class Aluno {
 	
 	private Integer id;
@@ -77,7 +79,7 @@ public class Aluno {
 	}
 
 	@Override public String toString() {
-		return "Aluno [nome=" + nome + ", matricula=" + matricula + ", senha=" + senha + ", email=" + email + "]";
+		return "Aluno [id="+ id +", nome=" + nome + ", matricula=" + matricula + ", senha=" + senha + ", email=" + email + "]";
 	}
 
 	@Override public int hashCode() {

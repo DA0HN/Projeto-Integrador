@@ -42,15 +42,15 @@ public class AlunoService implements AlunoDao {
 		this.conexao = conexao;
 	}
 
-	@Override public void save(Aluno aluno) {
+	@Override public void save(Aluno a) {
 		PreparedStatement st = null;
 		try {
 			st = conexao.prepareStatement(AlunoSQL.SAVE.getValue(), Statement.RETURN_GENERATED_KEYS);
 			
-			st.setString(1, aluno.getNome());
-			st.setString(2, aluno.getMatricula());
-			st.setString(3, aluno.getSenha());
-			st.setString(4, aluno.getEmail());
+			st.setString(1, a.getNome());
+			st.setString(2, a.getMatricula());
+			st.setString(3, a.getSenha());
+			st.setString(4, a.getEmail());
 			
 			var linhas = st.executeUpdate();
 			
@@ -59,7 +59,7 @@ public class AlunoService implements AlunoDao {
 				ResultSet rs = st.getGeneratedKeys();
 				if( rs.next() ) {
 					int id = rs.getInt(1);
-					aluno.setId(id);
+					a.setId(id);
 				}
 				Database.closeResultSet(rs);
 			}
@@ -72,14 +72,14 @@ public class AlunoService implements AlunoDao {
 		}
 	}
 
-	@Override public void update(Aluno aluno) {
+	@Override public void update(Aluno a) {
 		PreparedStatement st = null;
 		try {
 			st = conexao.prepareStatement(AlunoSQL.UPDATE.getValue());
-			st.setString(1, aluno.getNome());
-			st.setString(2, aluno.getMatricula());
-			st.setString(3, aluno.getEmail());
-			st.setInt(4, aluno.getId());
+			st.setString(1, a.getNome());
+			st.setString(2, a.getMatricula());
+			st.setString(3, a.getEmail());
+			st.setInt(4, a.getId());
 			
 			st.executeUpdate();
 			
