@@ -1,22 +1,22 @@
-package br.edu.ifmt.cba.agenda.model.repository;
+package br.edu.ifmt.cba.agenda.model.repositorio;
 
 import br.edu.ifmt.cba.agenda.database.Database;
-import br.edu.ifmt.cba.agenda.model.service.AlunoService;
-import br.edu.ifmt.cba.agenda.model.service.DisciplinaService;
-import br.edu.ifmt.cba.agenda.model.service.HistoricoAlunoService;
+import br.edu.ifmt.cba.agenda.model.recurso.AlunoRecurso;
+import br.edu.ifmt.cba.agenda.model.recurso.DisciplinaRecurso;
+import br.edu.ifmt.cba.agenda.model.recurso.HistoricoAlunoRecurso;
 
 public class DaoFactory {
 	
-	public static AlunoService createAlunoDao() {
-		return new AlunoService( Database.getConnection() );
+	public static AlunoRecurso createAlunoDao() {
+		return new AlunoRecurso( Database.getConnection() );
 	}
 	
-	public static DisciplinaService createDisciplinaDao() {
-		return new DisciplinaService( Database.getConnection() );
+	public static DisciplinaRecurso createDisciplinaDao() {
+		return new DisciplinaRecurso( Database.getConnection() );
 	}
 	
-	public static HistoricoAlunoService createHistoricoService() {
-		return new HistoricoAlunoService( Database.getConnection() );
+	public static HistoricoAlunoRecurso createHistoricoDao() {
+		return new HistoricoAlunoRecurso( Database.getConnection() );
 	}
 	
 }

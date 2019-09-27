@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.model.service;
+package br.edu.ifmt.cba.agenda.model.recurso;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +11,9 @@ import java.util.List;
 import br.edu.ifmt.cba.agenda.database.Database;
 import br.edu.ifmt.cba.agenda.database.DatabaseException;
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
-import br.edu.ifmt.cba.agenda.model.repository.AlunoDao;
+import br.edu.ifmt.cba.agenda.model.repositorio.daoInterfaces.AlunoDao;
 
-public class AlunoService implements AlunoDao {
+public class AlunoRecurso implements AlunoDao {
 
 	protected enum AlunoSQL {
 
@@ -38,7 +38,7 @@ public class AlunoService implements AlunoDao {
 	
 	private Connection conexao;
 	
-	public AlunoService(Connection conexao) {
+	public AlunoRecurso(Connection conexao) {
 		this.conexao = conexao;
 	}
 
@@ -199,6 +199,7 @@ public class AlunoService implements AlunoDao {
 		var aluno = new Aluno();
 		
 		aluno.setNome( rs.getString("nome"));
+		aluno.setSenha( rs.getString("senha"));
 		aluno.setMatricula( rs.getString("matricula"));
 		aluno.setEmail( rs.getString("email"));
 		aluno.setId( rs.getInt("id"));
