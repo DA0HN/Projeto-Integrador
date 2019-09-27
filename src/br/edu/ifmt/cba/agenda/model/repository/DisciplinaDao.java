@@ -10,7 +10,7 @@ public interface DisciplinaDao {
 	void update(Disciplina d);
 	void deleteById(Integer id);
 	Disciplina findById(Integer id);
-	Disciplina findByNome(String Nome);
+	Disciplina findByDisciplina(String Nome);
 	List<Disciplina> findAll();
-	
+
 }
