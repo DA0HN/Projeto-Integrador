@@ -20,7 +20,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 
 	protected enum HistoricoSQL{
 		
-		VERIFICA_HISTORICO("select * from historicoAluno  where id_aluno in(?) and id_disciplina in(?)"),
+		VERIFICA_HISTORICO("select * from historicoAluno where id_aluno in(?) and id_disciplina in(?)"),
 		MATRICULAR_ALUNO_EM_DISCIPLINA("insert into historicoAluno (id_aluno,id_disciplina) value (?,?)"),
 		SAVE_FALTA(""),
 		SAVE_NOTA("insert into notas (id_aluno, id_disciplina, nota) value (?,?,?)"),	// só salva notas se for em uma matéria que o aluno frequenta
@@ -86,7 +86,8 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 			var alunoId = aluno.getId();
 			var disciplinaId = disciplina.getId();
 			
-			if( verificaHistorico(alunoId, disciplinaId) ) {
+			if( verificaHistorico(alunoId, disciplinaId) == false ) {
+				/* a relacao so sera criada se nao existir no banco de dados */
 				st = conexao.prepareStatement(HistoricoSQL.MATRICULAR_ALUNO_EM_DISCIPLINA.getValue());
 				st.setInt(1, alunoId);
 				st.setInt(2, disciplinaId);
@@ -123,7 +124,10 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 				if( linha > 0) {
 					ResultSet rs = st.getGeneratedKeys();
 					if( rs.next() ) {
-						d.getNotas().add(instanciarNota(rs));
+						var n = new Nota();
+						n.setId(rs.getInt(1));
+						n.setNota(nota);
+						d.getNotas().add(n);
 					}
 				}
 				
