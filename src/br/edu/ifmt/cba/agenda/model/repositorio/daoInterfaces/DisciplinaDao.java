@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.model.repository;
+package br.edu.ifmt.cba.agenda.model.repositorio.daoInterfaces;
 
 import java.util.List;
 

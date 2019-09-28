@@ -76,8 +76,12 @@ public class Aluno {
 		return senha;
 	}
 
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
 	@Override public String toString() {
-		return "Aluno [nome=" + nome + ", matricula=" + matricula + ", senha=" + senha + ", email=" + email + "]";
+		return "Aluno [id="+ id +", nome=" + nome + ", matricula=" + matricula + ", senha=" + senha + ", email=" + email + "]";
 	}
 
 	@Override public int hashCode() {

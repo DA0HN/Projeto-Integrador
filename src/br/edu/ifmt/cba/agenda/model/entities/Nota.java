@@ -5,6 +5,12 @@ public class Nota {
 	private Integer id;
 	private Double nota;
 	
+	public Nota() {}
+	
+	public Nota(Double nota) {
+		this.nota = nota;
+	}
+	
 	public Nota(Integer id, Double nota) {
 		this.id = id;
 		this.nota = nota;

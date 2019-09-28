@@ -9,7 +9,7 @@ public class Disciplina {
 
 	private String nome;
 	private String professor;
-	private Integer faltas;
+	private Integer faltas = 0;
 	private Integer numeroDeAulas;
 	private Double media;
 
@@ -46,7 +46,7 @@ public class Disciplina {
 	}
 
 	public void setFaltas(Integer faltas) {
-		this.faltas = faltas;
+		this.faltas += faltas;
 	}
 
 	public Integer getNumeroDeAulas() {

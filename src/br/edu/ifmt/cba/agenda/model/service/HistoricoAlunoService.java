@@ -1,84 +1,50 @@
 package br.edu.ifmt.cba.agenda.model.service;
 
-import java.sql.Connection;
-import java.util.List;
-
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Nota;
-import br.edu.ifmt.cba.agenda.model.repository.HistoricoAlunoDao;
+import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
 
-public class HistoricoAlunoService implements HistoricoAlunoDao {
-
-	protected enum HistoricoAlunoSQL{
-		
-		SAVE_FALTA(""),
-		SAVE_NOTA(""),	// só salva notas se for em uma matéria que o aluno frequenta
-		UPDATE_NOTA(""),
-		UPATE_FALTA(""),
-		DELETE_NOTAS_BY_ID(""),
-		DELETE_FALTAS_BY_ID(""),
-		FIND_NOTAS_BY_DISCIPLINA(""),
-		FIND_FALTAS_BY_DISCIPLINA(""),
-		FIND_NOTAS("");
-		
-		private String value;
-		
-		HistoricoAlunoSQL(String value){
-			this.value = value;
-		}
-		
-		protected String getValue() {
-			return value;
+public abstract class HistoricoAlunoService {
+	
+	public static void matricularEmDisciplina(Aluno aluno, Disciplina disciplina) {
+		try {
+			if( disciplina.getId() != null ) {
+				aluno.getDisciplinas().add(disciplina);
+			}
+			else {
+				throw new DadosInvalidos("Os dados da disciplina não são válidos"); 
+			}
+		} catch (DadosInvalidos e) {
+			throw new DadosInvalidos(e.getMessage());
 		}
 	}
 	
-	private Connection conexao;
+	public static void adicionaNovaNota(Aluno aluno, Disciplina disciplina, Nota nota) {
+		for(Disciplina d : aluno.getDisciplinas() ) {
+			if( d.equals(disciplina) ) {
+				d.getNotas().add(nota);
+			}
+		}
+	}
 	
-	public HistoricoAlunoService(Connection conexao){
-		this.conexao = conexao;
-	}
-
-	@Override public void saveNota(Aluno aluno, Disciplina disciplina, Double nota) {
-		// TODO Auto-generated method stub
+	public static Disciplina findDisciplinaByNome(Aluno aluno, String nome ) {
 		
-	}
-
-	@Override public void saveFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override public void updateNota(Aluno aluno, Disciplina disciplina, Double nota) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override public void updateFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override public void deleteNotaById(Aluno aluno, Disciplina disciplina) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override public void deleteFaltaById(Aluno aluno, Disciplina disciplina) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override public Integer findFaltaByDisciplina(Aluno aluno, Disciplina disciplina) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override public List<Nota> findNotasByDisciplina(Aluno aluno, Disciplina disciplina) {
-		// TODO Auto-generated method stub
+		for(Disciplina d : aluno.getDisciplinas() ) {
+			if( d.getNome().equals(nome)) {
+				return d;
+			}
+		}
 		return null;
 	}
 	
-	
-	
+	public static int atualizaFaltas(Aluno aluno, Disciplina disciplina, Integer faltas) {
+		for( Disciplina d : aluno.getDisciplinas() ) {
+			if( d.equals(disciplina) ) {
+				d.setFaltas(faltas);
+				return d.getFaltas();
+			}
+		}
+		return 0;
+	}
 }
