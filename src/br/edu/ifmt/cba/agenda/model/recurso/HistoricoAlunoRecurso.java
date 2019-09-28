@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifmt.cba.agenda.database.Database;
@@ -24,12 +25,11 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		MATRICULAR_ALUNO_EM_DISCIPLINA("insert into historicoAluno (id_aluno,id_disciplina) value (?,?)"),
 		SAVE_FALTA("update historicoAluno set faltas=? where id_aluno=? and id_disciplina=?"),
 		SAVE_NOTA("insert into notas (id_aluno, id_disciplina, nota) value (?,?,?)"),	// só salva notas se for em uma matéria que o aluno frequenta
-		DELETE_NOTAS_BY_ID(""),
-		DELETE_FALTAS_BY_ID(""),
+		DELETE_NOTAS_BY_ID("delete from notas where id=?"),
+		REMOVE_FALTA_BY_ID(""),
 		FIND_FALTA("select faltas from historicoAluno where id_aluno in(?) and id_disciplina in(?)"),
-		FIND_NOTAS_BY_DISCIPLINA("select nota from notas where id_aluno in(?) and id_disciplina in(?)"),
-		FIND_FALTAS_BY_DISCIPLINA(""),
-		FIND_NOTAS("");
+		FIND_NOTAS_BY_DISCIPLINA("select * from notas where id_aluno in(?) and id_disciplina in(?)"),
+		FIND_FALTAS_BY_DISCIPLINA("");
 		
 		private String value;
 		
@@ -73,7 +73,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 	
-	private Integer getFalta(Aluno a, Disciplina d) {
+	@Override public Integer getFalta(Aluno a, Disciplina d) {
 		
 		PreparedStatement st = null;
 		try {
@@ -203,10 +203,12 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 
-	@Override public void deleteNotaById(Aluno aluno, Disciplina disciplina) {
+	@Override public void deleteNota(Nota nota) {
 		PreparedStatement st = null;
 		try {
-			
+			st = conexao.prepareStatement(HistoricoSQL.DELETE_NOTAS_BY_ID.getValue());
+			st.setInt(1, nota.getId());
+			st.executeUpdate();
 		}
 		catch(SQLException e) {
 			throw new DatabaseException( e.getMessage() );
@@ -216,55 +218,48 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 
-	@Override public void deleteFaltaById(Aluno aluno, Disciplina disciplina) {
-		PreparedStatement st = null;
-		try {
-			
-		}
-		catch(SQLException e) {
-			throw new DatabaseException( e.getMessage() );
-		}
-		finally {
-			Database.closeStatement(st);
-		}
-	}
-
-	@Override public Integer findFaltaByDisciplina(Aluno aluno, Disciplina disciplina) {
-		PreparedStatement st = null;
-		try {
-			
-			return null;
-		}
-		catch(SQLException e) {
-			throw new DatabaseException( e.getMessage() );
-		}
-		finally {
-			Database.closeStatement(st);
-		}
+	@Override public void deleteFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
+		saveFalta(aluno, disciplina, (-falta));
 	}
 
 	@Override public List<Nota> findNotasByDisciplina(Aluno aluno, Disciplina disciplina) {
 		PreparedStatement st = null;
+		ResultSet rs = null;
 		try {
-			st = conexao.prepareStatement(HistoricoSQL.FIND_NOTAS_BY_DISCIPLINA.getValue());
-			st.setInt(1, aluno.getId());
-			st.setInt(2, disciplina.getId());
+			if( verificaHistorico(aluno.getId(), disciplina.getId())) {
+				
+				st = conexao.prepareStatement(HistoricoSQL.FIND_NOTAS_BY_DISCIPLINA.getValue());
+				st.setInt(1, aluno.getId());
+				st.setInt(2, disciplina.getId());
+				rs = st.executeQuery();
+				
+				List<Nota> lista = new ArrayList<Nota>();
+				
+				while( rs.next() ) {
+					lista.add(instanciarNota(rs));
+				}
+				System.out.println(lista);
+				return lista;
+			}
+			else {
+				throw new DadosInvalidos("O aluno " + aluno.getNome() + " não está matriculado na disciplina " + disciplina.getNome() +" .");
+			}
+			
 		}
 		catch(SQLException e) {
 			throw new DatabaseException( e.getMessage() );
 		}
 		finally {
 			Database.closeStatement(st);
+			Database.closeResultSet(rs);
 		}
 	}
 	
-	public Nota instanciarNota(ResultSet rs) throws SQLException {
+	private Nota instanciarNota(ResultSet rs) throws SQLException {
 		Nota nota = new Nota();
 		nota.setId( rs.getInt("id"));
 		nota.setNota( rs.getDouble("nota"));
 		return nota;
 	}
-	
-	
 	
 }
