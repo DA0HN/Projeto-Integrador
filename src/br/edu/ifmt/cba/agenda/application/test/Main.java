@@ -21,6 +21,6 @@ public class Main {
 		System.out.println("Adicinando nova nota a matéria de calculo iv");
 		
 		//historicoDao.saveFalta(aluno, materia, 10);
-		
+		historicoDao.findNotasByDisciplina(aluno, materia);
 	}
 }
