@@ -58,7 +58,8 @@ public class LoginController implements Initializable{
 	public void loginCondition() {
 		if( txEmail.getText().equals("root") && txSenha.getText().equals("root")) {
 			logar();
-		}else {
+		} 
+		else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Eu sou");
 			alert.setHeaderText("Daleste");

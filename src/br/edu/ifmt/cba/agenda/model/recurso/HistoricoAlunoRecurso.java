@@ -22,13 +22,12 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		
 		VERIFICA_HISTORICO("select * from historicoAluno where id_aluno in(?) and id_disciplina in(?)"),
 		MATRICULAR_ALUNO_EM_DISCIPLINA("insert into historicoAluno (id_aluno,id_disciplina) value (?,?)"),
-		SAVE_FALTA(""),
+		SAVE_FALTA("update historicoAluno set faltas=? where id_aluno=? and id_disciplina=?"),
 		SAVE_NOTA("insert into notas (id_aluno, id_disciplina, nota) value (?,?,?)"),	// só salva notas se for em uma matéria que o aluno frequenta
-		UPDATE_NOTA(""),
-		UPATE_FALTA(""),
 		DELETE_NOTAS_BY_ID(""),
 		DELETE_FALTAS_BY_ID(""),
-		FIND_NOTAS_BY_DISCIPLINA(""),
+		FIND_FALTA("select faltas from historicoAluno where id_aluno in(?) and id_disciplina in(?)"),
+		FIND_NOTAS_BY_DISCIPLINA("select nota from notas where id_aluno in(?) and id_disciplina in(?)"),
 		FIND_FALTAS_BY_DISCIPLINA(""),
 		FIND_NOTAS("");
 		
@@ -49,7 +48,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		this.conexao = conexao;
 	}
 
-	public Boolean verificaHistorico(Integer alunoId, Integer disciplinaId) {
+	private Boolean verificaHistorico(Integer alunoId, Integer disciplinaId) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
@@ -67,6 +66,31 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 			
 		}
 		catch( SQLException e) {
+			throw new DatabaseException( e.getMessage() );
+		}
+		finally {
+			Database.closeStatement(st);
+		}
+	}
+	
+	private Integer getFalta(Aluno a, Disciplina d) {
+		
+		PreparedStatement st = null;
+		try {
+			st = conexao.prepareStatement(HistoricoSQL.FIND_FALTA.getValue());
+			st.setInt(1, a.getId());
+			st.setInt(2, d.getId());
+			ResultSet rs = st.executeQuery();
+			if( rs.next() ) {
+				int falta = rs.getInt("faltas");
+				return falta;
+			}
+			else {
+				throw new DatabaseException("Não foi possivel recuperar as faltas do aluno.");
+			}
+			
+		}
+		catch( SQLException e ) {
 			throw new DatabaseException( e.getMessage() );
 		}
 		finally {
@@ -148,33 +172,28 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 	@Override public void saveFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
 		PreparedStatement st = null;
 		try {
-			
-		}
-		catch(SQLException e) {
-			throw new DatabaseException( e.getMessage() );
-		}
-		finally {
-			Database.closeStatement(st);
-		}
-	}
-
-	@Override public void updateNota(Aluno aluno, Disciplina disciplina, Double nota) {
-		PreparedStatement st = null;
-		try {
-			
-		}
-		catch(SQLException e) {
-			throw new DatabaseException( e.getMessage() );
-		}
-		finally {
-			Database.closeStatement(st);
-		}
-	}
-
-	@Override public void updateFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
-		PreparedStatement st = null;
-		try {
-			
+			if( verificaHistorico(aluno.getId(), disciplina.getId())) {
+				int faltaDatabase = getFalta(aluno, disciplina);
+				faltaDatabase += falta;
+				System.out.println(faltaDatabase);
+				
+				HistoricoAlunoService.atualizaFaltas(aluno, disciplina, falta);
+				
+				st = conexao.prepareStatement(HistoricoSQL.SAVE_FALTA.getValue());
+				st.setInt(1, faltaDatabase);
+				st.setInt(2, aluno.getId());
+				st.setInt(3, disciplina.getId());
+				var linha = st.executeUpdate();
+				if( linha > 0 ) {
+					System.out.println("Sucesso na atualização de faltas! Numero de linhas alteradas: " + linha);
+				}
+				else {
+					throw new DatabaseException("Não foi possivel executar a atualização de suas faltas.");
+				}
+			}
+			else {
+				throw new DadosInvalidos("O aluno " + aluno.getNome() + " não está matriculado na disciplina " + disciplina.getNome() +" .");
+			}
 		}
 		catch(SQLException e) {
 			throw new DatabaseException( e.getMessage() );
@@ -227,8 +246,9 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 	@Override public List<Nota> findNotasByDisciplina(Aluno aluno, Disciplina disciplina) {
 		PreparedStatement st = null;
 		try {
-			
-			return null;
+			st = conexao.prepareStatement(HistoricoSQL.FIND_NOTAS_BY_DISCIPLINA.getValue());
+			st.setInt(1, aluno.getId());
+			st.setInt(2, disciplina.getId());
 		}
 		catch(SQLException e) {
 			throw new DatabaseException( e.getMessage() );

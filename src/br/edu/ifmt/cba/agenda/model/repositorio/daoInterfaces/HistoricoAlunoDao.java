@@ -10,8 +10,6 @@ public interface HistoricoAlunoDao {
 	
 	void saveNota(Aluno aluno, Disciplina disciplina, Double nota);
 	void saveFalta(Aluno aluno, Disciplina disciplina, Integer falta);
-	void updateNota(Aluno aluno, Disciplina disciplina, Double nota);
-	void updateFalta(Aluno aluno, Disciplina disciplina, Integer falta);
 	void deleteNotaById(Aluno aluno, Disciplina disciplina);
 	void deleteFaltaById(Aluno aluno, Disciplina disciplina);
 	Integer findFaltaByDisciplina(Aluno aluno, Disciplina disciplina);

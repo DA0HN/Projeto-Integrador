@@ -16,16 +16,11 @@ public class Main {
 		var aluno = alunoDao.findByMatricula("admin");
 		var materia = disciplinaDao.findById(1);
 		
-		System.out.println(aluno);		
-		System.out.println(materia);
-		
 		//historicoDao.matricularEmDisciplina(aluno, materia);
 		
 		System.out.println("Adicinando nova nota a matéria de calculo iv");
 		
-		historicoDao.saveNota(aluno, materia, 10.0);
-		
-		System.out.println(materia);
+		//historicoDao.saveFalta(aluno, materia, 10);
 		
 	}
 }
