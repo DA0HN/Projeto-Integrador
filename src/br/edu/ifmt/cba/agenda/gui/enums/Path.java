@@ -8,6 +8,7 @@ public enum Path {
 	PRINCIPAL("../fxml/Principal.fxml"),
 	NOTAS("../fxml/Notas.fxml"),
 	HORARIOS("../fxml/Horarios.fxml"),
+	CRIA_CONTA("../fxml/CriaConta.fxml"),
 	STYLE("../style/modena_dark.css");
 	
 	private String value;

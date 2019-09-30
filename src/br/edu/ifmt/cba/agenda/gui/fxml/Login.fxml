@@ -5,11 +5,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="300.0" prefHeight="347.0" prefWidth="327.0" styleClass="about-button" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.agenda.gui.controller.LoginController">
+<AnchorPane maxHeight="428.0" maxWidth="400.0" minHeight="300.0" prefHeight="328.0" prefWidth="307.0" styleClass="about-button" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.agenda.gui.controller.LoginController">
    <children>
-      <TextField fx:id="txEmail" layoutX="56.0" layoutY="105.0" prefHeight="25.0" prefWidth="214.0" promptText="Email" />
-      <PasswordField fx:id="txSenha" layoutX="56.0" layoutY="161.0" prefHeight="25.0" prefWidth="214.0" promptText="Senha" />
-      <Button fx:id="btSair" layoutX="56.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Sair" />
-      <Button fx:id="btEntrar" layoutX="195.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Entrar" />
+      <TextField fx:id="txLogin" layoutX="47.0" layoutY="67.0" prefHeight="25.0" prefWidth="214.0" promptText="Número de matricula" />
+      <PasswordField fx:id="txSenha" layoutX="47.0" layoutY="115.0" prefHeight="25.0" prefWidth="214.0" promptText="Senha" />
+      <Button fx:id="btEntrar" layoutX="186.0" layoutY="168.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Entrar" />
+      <Button fx:id="btSair" layoutX="47.0" layoutY="168.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Sair" />
+      <Button fx:id="btNovaConta" layoutX="89.0" layoutY="262.0" mnemonicParsing="false" onKeyPressed="#btNovaContaOnKeyPressed" onMouseClicked="#btNovaContaOnClicked" text="Cadastrar nova conta" />
    </children>
 </AnchorPane>
