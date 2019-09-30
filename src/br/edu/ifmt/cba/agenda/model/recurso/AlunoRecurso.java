@@ -161,7 +161,7 @@ public class AlunoRecurso implements AlunoDao {
 				return a;
 			}
 			else {
-				throw new DatabaseException("Errp ao executar findById -> ");
+				throw new DatabaseException("Erro ao executar findById -> ");
 			}
 			
 		}
