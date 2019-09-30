@@ -5,7 +5,6 @@ import javafx.scene.input.KeyEvent;
 
 public class ButtonEvent {
 
-
 	public static boolean hasUserConfirmed(KeyEvent event) {
 		return (ButtonEvent.hasEnterPressed(event) || ButtonEvent.hasSpacePressed(event) );
 	}

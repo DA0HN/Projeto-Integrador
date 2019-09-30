@@ -16,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class CriaContaController implements Initializable {
 
@@ -30,49 +31,51 @@ public class CriaContaController implements Initializable {
     @FXML void btCadastrarOnClicked(MouseEvent event) {
     	getData();
     }
-
+    
     @FXML void btCadastrarOnKeyPressed(KeyEvent event) {
     	if( ButtonEvent.hasEnterPressed(event) ) {
     		getData();
     	}
     }
-
+    
     @FXML void psConfirmSenhaOnKeyPressed(KeyEvent event) {
     	if( ButtonEvent.hasEnterPressed(event) ) {
     		getData();
     	}
     }
-
+    
     @FXML void psSenhaOnKeyPressed(KeyEvent event) {
     	if( ButtonEvent.hasEnterPressed(event) ) {
     		getData();
     	}
     }
-
+    
     @FXML void txEmailOnKeyPressed(KeyEvent event) {
     	if( ButtonEvent.hasEnterPressed(event) ) {
     		getData();
     	}
     }
-
+    
     @FXML void txMatriculaOnKeyPressed(KeyEvent event) {
     	if( ButtonEvent.hasEnterPressed(event) ) {
     		getData();
     	}
     }
-
+    
     @FXML void txNomeOnKeyPressed(KeyEvent event) {
-    	if( ButtonEvent.hasEnterPressed(event) ) {
+		if( ButtonEvent.hasEnterPressed(event) ) {
     		getData();
     	}
     }
     
     @FXML void btSairOnKeyPressed(KeyEvent event ) {
-    	
+    	if( ButtonEvent.hasUserConfirmed(event) ) {
+    		buildLogin();
+    	}
     }
     
     @FXML void btSairOnClicked(MouseEvent event) {
-    	
+    	buildLogin();
     }
     
     private void getData() {
@@ -83,8 +86,8 @@ public class CriaContaController implements Initializable {
     		String senha = psSenha.getText();
     		String senhaConfirm = psConfirm.getText();
     		
-    		if( verificarDados(nome) && verificarDados(email) && verificarDados(matricula) && verificarDados(senha) && verificarDados(senhaConfirm) ) {
-    			if( !psConfirm.equals(psSenha) ) {
+    		if( verificaDados(nome) && verificaDados(email) && verificaDados(matricula) && verificaDados(senha) && verificaDados(senhaConfirm) ) {
+    			if( !senha.equals(senhaConfirm) ) {
         			throw new IllegalStateException("Senha inválida, por favor digite novamente.");
         		}
     			Aluno novoUsuario = new Aluno(nome, matricula, senha, email);
@@ -102,13 +105,13 @@ public class CriaContaController implements Initializable {
     	}
     }
     
-    private boolean verificarDados(String str) {
-    	return str.isBlank() || str.isEmpty();
+    private boolean verificaDados(String str) {
+    	return !(str.isBlank() || str.isEmpty());
     }
     
     private void buildLogin() {
-    	ViewFactory.createLogin();
     	CriaConta.getStage().close();
+    	ViewFactory.createLogin().start(new Stage());
     }
     
 	@Override public void initialize(URL arg0, ResourceBundle arg1) {}

@@ -6,8 +6,9 @@ import java.util.ResourceBundle;
 import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.Login;
-import br.edu.ifmt.cba.agenda.gui.view.Principal;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
+import br.edu.ifmt.cba.agenda.model.entities.Aluno;
+import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +17,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -80,26 +80,50 @@ public class LoginController implements Initializable{
 		}
 	}
 	
+	private boolean verificaDados(String login, String senha) {
+		return (login.isBlank() || login.isEmpty()) && (senha.isBlank() || senha.isEmpty());
+	}
+	
 	public void autenticacao() {
-		if( txLogin.getText().equals("root") && txSenha.getText().equals("root")) {
-			logar();
-		} 
-		else {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Eu sou");
-			alert.setHeaderText("Daleste");
-			alert.setContentText("Cheguei mas to saindo fora");
-			alert.show();
+		String login = txLogin.getText();
+		String senha = txSenha.getText();
+		Aluno aluno = null;
+		try {
+			System.out.println(login);
+			if( !verificaDados(login, senha) ) {
+				aluno = DaoFactory.createAlunoDao().findByMatricula(login);
+			}
+			else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Erro ao autenticar seus dados");
+				alert.setContentText("Os dados inseridos ou são inválidos ou estão incorretos");
+				alert.show();
+				throw new DadosInvalidos("Erro ao autenticar suas credenciais.");
+			}
+			if( aluno != null ) {
+				if( aluno.getMatricula().equals(login) && aluno.getSenha().equals(senha) ) {
+					login();
+				}
+				else {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Erro ao autenticar seus dados");
+					alert.setContentText("Os dados inseridos ou são inválidos ou estão incorretos");
+					alert.show();
+					throw new DadosInvalidos("Erro ao autenticar suas credenciais.");
+				}
+			}
+		}
+		catch(DadosInvalidos e) {
+			throw new DadosInvalidos(e.getMessage());
 		}
 	}
 	
 	public static void fecha() {		
 		Login.getStage().close();
 	}
-	public static void logar() {
-		Principal p = new Principal();
+	public static void login() {
 		try {
-			p.start(new Stage());
+			ViewFactory.createPrincipal().start(new Stage());
 			fecha();
 		}
 		catch(Exception ex) {

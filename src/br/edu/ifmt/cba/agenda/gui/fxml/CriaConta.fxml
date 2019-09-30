@@ -51,8 +51,8 @@
                </font>
             </Label>
             <TextField fx:id="txNome" onKeyPressed="#txNomeOnKeyPressed" GridPane.columnIndex="1" />
-            <TextField fx:id="txEmail" onKeyPressed="#txEmailOnKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="txMatricula" onKeyPressed="#txMatriculaOnKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txEmail" onKeyPressed="#txEmailOnKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <PasswordField fx:id="psSenha" onKeyPressed="#psSenhaOnKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <PasswordField fx:id="psConfirm" onKeyPressed="#psConfirmSenhaOnKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
@@ -63,6 +63,6 @@
          </font>
       </Label>
       <Button fx:id="btCadastrar" layoutX="258.0" layoutY="297.0" mnemonicParsing="false" onKeyPressed="#btCadastrarOnKeyPressed" onMouseClicked="#btCadastrarOnClicked" text="Cadastrar" />
-      <Button fx:id="btSair" layoutX="207.0" layoutY="297.0" mnemonicParsing="false" onKeyPressed="#btCadastrarOnKeyPressed" onMouseClicked="#btCadastrarOnClicked" text="Sair" />
+      <Button fx:id="btSair" layoutX="207.0" layoutY="297.0" mnemonicParsing="false" onKeyPressed="#btSairOnKeyPressed" onMouseClicked="#btSairOnClicked" text="Sair" />
    </children>
 </AnchorPane>
