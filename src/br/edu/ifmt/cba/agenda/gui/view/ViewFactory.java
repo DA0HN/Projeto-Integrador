@@ -17,4 +17,8 @@ public class ViewFactory {
 	public static CadastrarDisciplina createCadastrarDisciplina() {
 		return new CadastrarDisciplina();
 	}
+	
+	public static CriaConta CriaConta() {
+		return new CriaConta();
+	}
 }
