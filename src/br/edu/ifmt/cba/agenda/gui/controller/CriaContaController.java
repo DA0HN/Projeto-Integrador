@@ -38,36 +38,6 @@ public class CriaContaController implements Initializable {
     	}
     }
     
-    @FXML void psConfirmSenhaOnKeyPressed(KeyEvent event) {
-    	if( ButtonEvent.hasEnterPressed(event) ) {
-    		getData();
-    	}
-    }
-    
-    @FXML void psSenhaOnKeyPressed(KeyEvent event) {
-    	if( ButtonEvent.hasEnterPressed(event) ) {
-    		getData();
-    	}
-    }
-    
-    @FXML void txEmailOnKeyPressed(KeyEvent event) {
-    	if( ButtonEvent.hasEnterPressed(event) ) {
-    		getData();
-    	}
-    }
-    
-    @FXML void txMatriculaOnKeyPressed(KeyEvent event) {
-    	if( ButtonEvent.hasEnterPressed(event) ) {
-    		getData();
-    	}
-    }
-    
-    @FXML void txNomeOnKeyPressed(KeyEvent event) {
-		if( ButtonEvent.hasEnterPressed(event) ) {
-    		getData();
-    	}
-    }
-    
     @FXML void btSairOnKeyPressed(KeyEvent event ) {
     	if( ButtonEvent.hasUserConfirmed(event) ) {
     		buildLogin();
@@ -76,6 +46,12 @@ public class CriaContaController implements Initializable {
     
     @FXML void btSairOnClicked(MouseEvent event) {
     	buildLogin();
+    }
+    
+    @FXML void textFieldHasEnterPressed(KeyEvent event) {
+    	if( ButtonEvent.hasUserConfirmed(event) ) {
+    		getData();
+    	}
     }
     
     private void getData() {

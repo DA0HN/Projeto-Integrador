@@ -50,11 +50,11 @@
                   <Font name="Calibri" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txNome" onKeyPressed="#txNomeOnKeyPressed" GridPane.columnIndex="1" />
-            <TextField fx:id="txMatricula" onKeyPressed="#txMatriculaOnKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txEmail" onKeyPressed="#txEmailOnKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <PasswordField fx:id="psSenha" onKeyPressed="#psSenhaOnKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <PasswordField fx:id="psConfirm" onKeyPressed="#psConfirmSenhaOnKeyPressed" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txNome" onKeyPressed="#textFieldHasEnterPressed" GridPane.columnIndex="1" />
+            <TextField fx:id="txMatricula" onKeyPressed="#textFieldHasEnterPressed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txEmail" onKeyPressed="#textFieldHasEnterPressed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField fx:id="psSenha" onKeyPressed="#textFieldHasEnterPressed" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <PasswordField fx:id="psConfirm" onKeyPressed="#textFieldHasEnterPressed" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Label layoutX="82.0" layoutY="41.0" text="CADASTRO DO NOVO ALUNO">

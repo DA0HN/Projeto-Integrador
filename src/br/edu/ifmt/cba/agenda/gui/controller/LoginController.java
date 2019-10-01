@@ -89,7 +89,6 @@ public class LoginController implements Initializable{
 		String senha = txSenha.getText();
 		Aluno aluno = null;
 		try {
-			System.out.println(login);
 			if( !verificaDados(login, senha) ) {
 				aluno = DaoFactory.createAlunoDao().findByMatricula(login);
 			}
