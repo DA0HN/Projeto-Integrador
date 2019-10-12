@@ -9,6 +9,7 @@ import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
 import br.edu.ifmt.cba.agenda.gui.view.Login;
 import br.edu.ifmt.cba.agenda.gui.view.Principal;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
+import br.edu.ifmt.cba.agenda.model.service.UsuarioAtual;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -53,6 +54,7 @@ public class PrincipalController implements Initializable{
     }
     
     public void handleButtonTrocarUsuario() {
+    	UsuarioAtual.terminarSessao();
     	Login login = ViewFactory.createLogin();
     	login.start(new Stage());
     	fecha();

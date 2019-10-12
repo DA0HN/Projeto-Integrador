@@ -8,6 +8,9 @@ import br.edu.ifmt.cba.agenda.database.DatabaseException;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.recurso.DisciplinaRecurso;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.service.UsuarioAtual;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class ListarDisciplinasController implements Initializable {	
     
@@ -26,26 +30,37 @@ public class ListarDisciplinasController implements Initializable {
     @FXML private Label labelNumeroDeAulas;
     @FXML private Label labelNumeroDeFaltas;
     
-    private DisciplinaRecurso recurso = DaoFactory.createDisciplinaDao();
+    private DisciplinaRecurso dao = DaoFactory.createDisciplinaDao();
     
 	private ObservableList<Disciplina> observableDisciplina;
+    
+	@Override public void initialize(URL arg0, ResourceBundle arg1) {
+		initTableView();
 	
+		tableDisciplinas.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> selecionarDisciplina(newValue));
+	
+	}
     
-    private void initTableView() {
+	private void selecionarDisciplina(Disciplina d) {
+		d = tableDisciplinas.getSelectionModel().getSelectedItem();
+		if( d != null ){
+			labelNomeDaDisciplina.setText(d.getNome());
+			labelNomeDoProfessor.setText(d.getProfessor());
+			labelNumeroDeFaltas.setText(String.valueOf(d.getFaltas()));
+			labelNumeroDeAulas.setText(String.valueOf(d.getNumeroDeAulas()));
+		}	
+	}
+
+	private void initTableView() {
     	columnDisciplina.setCellValueFactory(new PropertyValueFactory<>("nome"));
-    
     	atualizaTabela();
     }
     
-    @Override public void initialize(URL arg0, ResourceBundle arg1) {
-    	initTableView();
-    }
-    
     private void atualizaTabela() {
-    	if( recurso == null ) {
+    	if( dao == null ) {
     		throw new DatabaseException("Erro ao atualizar a tabela de disciplinas.");
     	}
-    	List<Disciplina> list = recurso.findAll();
+    	List<Disciplina> list = UsuarioAtual.getUsuario().getDisciplinas();
     	observableDisciplina = FXCollections.observableArrayList(list);
     	tableDisciplinas.setItems(observableDisciplina);
     }
