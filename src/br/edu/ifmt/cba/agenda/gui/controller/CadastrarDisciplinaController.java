@@ -1,8 +1,11 @@
 package br.edu.ifmt.cba.agenda.gui.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import br.edu.ifmt.cba.agenda.gui.listeners.DataChangeListener;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
@@ -22,6 +25,8 @@ public class CadastrarDisciplinaController implements Initializable{
     @FXML private Button btLimpar; 
     @FXML private Button btCadastrar;
     @FXML private AnchorPane cadastrarDisciplinaController;
+    
+    //private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
     
     @FXML void btLimparOnClicked(MouseEvent event) {
     	limparTextField();

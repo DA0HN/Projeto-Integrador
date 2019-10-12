@@ -10,6 +10,7 @@ import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.service.AutenticadorDeUsuario;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -80,16 +81,12 @@ public class LoginController implements Initializable{
 		}
 	}
 	
-	private boolean verificaDados(String login, String senha) {
-		return (login.isBlank() || login.isEmpty()) && (senha.isBlank() || senha.isEmpty());
-	}
-	
 	public void autenticacao() {
 		String login = txLogin.getText();
 		String senha = txSenha.getText();
 		Aluno aluno = null;
 		try {
-			if( !verificaDados(login, senha) ) {
+			if( AutenticadorDeUsuario.validaEntradas(login, senha) ) {
 				aluno = DaoFactory.createAlunoDao().findByMatricula(login);
 			}
 			else {
@@ -100,7 +97,7 @@ public class LoginController implements Initializable{
 				throw new DadosInvalidos("Erro ao autenticar suas credenciais.");
 			}
 			if( aluno != null ) {
-				if( aluno.getMatricula().equals(login) && aluno.getSenha().equals(senha) ) {
+				if( AutenticadorDeUsuario.autenticar(aluno, senha, login) ) {
 					login();
 				}
 				else {

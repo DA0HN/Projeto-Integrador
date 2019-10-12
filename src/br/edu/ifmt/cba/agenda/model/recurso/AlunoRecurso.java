@@ -148,7 +148,7 @@ public class AlunoRecurso implements AlunoDao {
 	}
 
 
-	@Override public Aluno findByMatricula(String matricula) {
+	@Override public Aluno findByMatricula(String matricula) throws DatabaseException{
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		try {
