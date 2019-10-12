@@ -11,6 +11,7 @@ import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
 import br.edu.ifmt.cba.agenda.model.service.AutenticadorDeUsuario;
+import br.edu.ifmt.cba.agenda.model.service.UsuarioAtual;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -98,6 +99,7 @@ public class LoginController implements Initializable{
 			}
 			if( aluno != null ) {
 				if( AutenticadorDeUsuario.autenticar(aluno, senha, login) ) {
+					UsuarioAtual.setUsuario(aluno);
 					login();
 				}
 				else {

@@ -14,6 +14,7 @@ import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Nota;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
+import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
 import br.edu.ifmt.cba.agenda.model.repositorio.daoInterfaces.HistoricoAlunoDao;
 import br.edu.ifmt.cba.agenda.model.service.HistoricoAlunoService;
 
@@ -27,6 +28,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		SAVE_NOTA("insert into notas (id_aluno, id_disciplina, nota) value (?,?,?)"),	// só salva notas se for em uma matéria que o aluno frequenta
 		DELETE_NOTAS_BY_ID("delete from notas where id=?"),
 		REMOVE_FALTA_BY_ID(""),
+		FIND_DISCIPLINA_BY_ALUNO("select id_disciplina from historicoAluno where id_aluno in(?)"),
 		FIND_FALTA("select faltas from historicoAluno where id_aluno in(?) and id_disciplina in(?)"),
 		FIND_NOTAS_BY_DISCIPLINA("select * from notas where id_aluno in(?) and id_disciplina in(?)"),
 		FIND_FALTAS_BY_DISCIPLINA("");
@@ -72,6 +74,28 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 			Database.closeStatement(st);
 		}
 	}
+	
+	@Override public List<Disciplina> findDisciplinasByAluno(Integer id) {
+		PreparedStatement st = null;
+		List<Disciplina> disciplinas = new ArrayList<>();
+		try {
+			st = conexao.prepareStatement(HistoricoSQL.FIND_DISCIPLINA_BY_ALUNO.getValue());
+			st.setInt(1, id);
+			ResultSet rs = st.executeQuery();
+			while( rs.next() ) {
+				disciplinas.add(DaoFactory.createDisciplinaDao().findById(rs.getInt("id_disciplina")));
+			}
+			
+			return disciplinas;
+		}
+		catch( SQLException e) {
+			throw new DatabaseException( e.getMessage() );
+		}
+		finally {
+			Database.closeStatement(st);
+		}
+	}
+	
 	
 	@Override public Integer getFalta(Aluno a, Disciplina d) {
 		
@@ -238,7 +262,6 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 				while( rs.next() ) {
 					lista.add(instanciarNota(rs));
 				}
-				System.out.println(lista);
 				return lista;
 			}
 			else {

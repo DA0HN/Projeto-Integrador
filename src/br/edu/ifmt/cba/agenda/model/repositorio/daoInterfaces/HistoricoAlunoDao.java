@@ -14,4 +14,5 @@ public interface HistoricoAlunoDao {
 	void deleteFalta(Aluno aluno, Disciplina disciplina, Integer falta);
 	Integer getFalta(Aluno aluno, Disciplina disciplina);
 	List<Nota> findNotasByDisciplina(Aluno aluno, Disciplina disciplina);
+	public List<Disciplina> findDisciplinasByAluno(Integer id);
 }
