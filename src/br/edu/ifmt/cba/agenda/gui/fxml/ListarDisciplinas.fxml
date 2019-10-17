@@ -24,9 +24,9 @@
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="labelNomeDaDisciplina" contentDisplay="CENTER" layoutX="14.0" layoutY="11.0" prefHeight="95.0" prefWidth="465.0" AnchorPane.bottomAnchor="354.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="11.0">
+                  <Label fx:id="labelNomeDaDisciplina" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="47.0" prefHeight="59.0" prefWidth="465.0" textAlignment="JUSTIFY">
                      <font>
-                        <Font name="Consolas Bold Italic" size="28.0" />
+                        <Font name="Consolas Bold Italic" size="24.0" />
                      </font>
                   </Label>
                   <GridPane layoutX="144.0" layoutY="177.0" prefHeight="128.0" prefWidth="260.0">

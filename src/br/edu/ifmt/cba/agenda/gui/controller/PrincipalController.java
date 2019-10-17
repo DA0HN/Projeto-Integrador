@@ -22,11 +22,10 @@ public class PrincipalController implements Initializable{
 	@FXML private Button btTrocarUsuario;
 	@FXML private Button btDisciplina;
     @FXML private Button btNotas;
-    @FXML private Button btHorarios;
+    @FXML private Button btPrincipal;
     @FXML private Button btCadastrarDisciplina; 
     
     @FXML private AnchorPane principalController;
-   
 	
     @FXML public void handleButtonDisciplina() {
     	trocarAnchorPane(Path.LISTAR_DISCIPLINAS.getValue());
@@ -40,8 +39,8 @@ public class PrincipalController implements Initializable{
     	trocarAnchorPane(Path.CADASTRAR_DISCIPLINAS.getValue());
     }
     
-    @FXML public void handleButtonHorarios() {
-    	trocarAnchorPane(Path.HORARIOS.getValue());
+    @FXML public void handleButtonPrincipal() {
+    	trocarAnchorPane(Path.MENU_PRINCIPAL.getValue());
     }
     
     public void trocarAnchorPane(String str) {
@@ -53,7 +52,7 @@ public class PrincipalController implements Initializable{
 		}
     }
     
-    public void handleButtonTrocarUsuario() {
+    @FXML public void handleButtonTrocarUsuario() {
     	UsuarioAtual.terminarSessao();
     	Login login = ViewFactory.createLogin();
     	login.start(new Stage());

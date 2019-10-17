@@ -22,13 +22,23 @@ public class UsuarioAtual {
 		UsuarioAtual.usuario = usuario;
 		popularNotas();
 		popularFaltas();
+		popularMedia();
 	}
 	
 	public static void atualizarDados() {
 		popularNotas();
 		popularFaltas();
+		popularMedia();
 	}
 	
+	private static void popularMedia() {
+		List<Disciplina> lista = UsuarioAtual.usuario.getDisciplinas();
+		for(Disciplina d : lista) {
+			d.calcularMedia();	
+			//System.out.println(d.getMedia());
+		}
+	}
+
 	private static void popularNotas() {
 		if( UsuarioAtual.usuario == null ) {
 			throw new IllegalStateException("Erro ao popular notas");

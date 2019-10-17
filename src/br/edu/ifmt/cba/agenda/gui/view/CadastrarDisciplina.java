@@ -1,6 +1,9 @@
 package br.edu.ifmt.cba.agenda.gui.view;
 
+import java.io.IOException;
+
 import br.edu.ifmt.cba.agenda.gui.enums.Path;
+import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,8 +24,8 @@ public class CadastrarDisciplina extends Application {
 			stage.setScene(scene);
 			stage.setResizable(false);
 			stage.show();
-		} catch(Exception e) {
-			e.getStackTrace();
+		} catch(IOException e) {
+			throw new ViewException("Erro ao tentar startar a tela CadastrarDisciplina.");
 		}
 		
 	}

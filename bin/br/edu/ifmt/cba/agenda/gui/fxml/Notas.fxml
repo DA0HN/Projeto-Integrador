@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="462.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.agenda.gui.controller.NotasController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifmt.cba.agenda.gui.controller.NotasController">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="207.0" layoutY="172.0" prefHeight="462.0" prefWidth="702.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="131.0" layoutY="133.0" prefHeight="462.0" prefWidth="702.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="tableDisciplinas" layoutX="-3.0" layoutY="-1.0" prefHeight="462.0" prefWidth="212.0">
+                    <columns>
+                      <TableColumn fx:id="columnDisciplina" editable="false" prefWidth="134.0" text="Disciplina" />
+                      <TableColumn fx:id="columnMedia" editable="false" prefWidth="75.0" text="Média" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="tableNotas" layoutX="152.0" layoutY="84.0" prefHeight="280.0" prefWidth="184.0">
+                     <columns>
+                        <TableColumn fx:id="columnNotas" prefWidth="183.0" text="Notas" />
+                     </columns>
+                  </TableView>
+                  <Label fx:id="labelNomeDisciplina" alignment="CENTER" contentDisplay="CENTER" layoutX="-4.0" layoutY="25.0" lineSpacing="10.0" prefHeight="36.0" prefWidth="495.0" textAlignment="CENTER" AnchorPane.bottomAnchor="399.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="25.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
+                  <GridPane alignment="CENTER_RIGHT" layoutX="176.0" layoutY="396.0" prefHeight="30.0" prefWidth="124.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="108.0" minWidth="10.0" prefWidth="52.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="72.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Media:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelMedia" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
         </items>
       </SplitPane>
    </children>

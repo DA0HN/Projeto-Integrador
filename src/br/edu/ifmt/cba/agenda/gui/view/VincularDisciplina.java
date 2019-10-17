@@ -1,5 +1,5 @@
 package br.edu.ifmt.cba.agenda.gui.view;
-	
+
 import java.io.IOException;
 
 import br.edu.ifmt.cba.agenda.gui.enums.Path;
@@ -10,31 +10,33 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Login extends Application {
-	
-	private static Stage stage;
+public class VincularDisciplina extends Application{
 
-	@Override public void start(Stage stage) {
-		try {
-			
-			Parent root = FXMLLoader.load(getClass().getResource(Path.LOGIN.getValue()));
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource(Path.STYLE.getValue()).toExternalForm());
-			stage.setTitle("Login");
-			stage.setScene(scene);
-			stage.setResizable(false);
-			setStage(stage);
-			stage.show();
-		} 
-		catch (IOException e) {
-			throw new ViewException("Erro ao tentar startar a tela Login.");
-		}
-	}
+	private static Stage stage;
+	
 	public static Stage getStage() {
 		return stage;
 	}
 
 	public static void setStage(Stage stage) {
-		Login.stage = stage;
+		VincularDisciplina.stage = stage;
 	}
+
+	@Override public void start(Stage stage) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource(Path.CRIA_VINCULO.getValue()));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource(Path.STYLE.getValue()).toExternalForm());
+			stage.setScene(scene);
+			stage.setResizable(false);
+			setStage(stage);
+			stage.show();
+		}
+		catch(IOException e) {
+			System.out.println(e.getMessage());
+//			throw new ViewException("Erro ao tentar startar a tela VincularDisciplina");
+		}
+		
+	}
+
 }

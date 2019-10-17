@@ -21,4 +21,8 @@ public class ViewFactory {
 	public static CriaConta CriaConta() {
 		return new CriaConta();
 	}
+	public static VincularDisciplina createVinculoDisciplina() {
+		return new VincularDisciplina();
+	}
+	
 }

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
+import br.edu.ifmt.cba.agenda.gui.utils.Alerta;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.Login;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
@@ -91,10 +92,9 @@ public class LoginController implements Initializable{
 				aluno = DaoFactory.createAlunoDao().findByMatricula(login);
 			}
 			else {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Erro ao autenticar seus dados");
-				alert.setContentText("Os dados inseridos ou são inválidos ou estão incorretos");
-				alert.show();
+				Alerta.mostrar(AlertType.ERROR,
+						"Erro ao aunteticar seus dados",
+						"Os dados inseridos ou são inválidos ou estão incorretos.");
 				throw new DadosInvalidos("Erro ao autenticar suas credenciais.");
 			}
 			if( aluno != null ) {
@@ -103,10 +103,9 @@ public class LoginController implements Initializable{
 					login();
 				}
 				else {
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setTitle("Erro ao autenticar seus dados");
-					alert.setContentText("Os dados inseridos ou são inválidos ou estão incorretos");
-					alert.show();
+					Alerta.mostrar(AlertType.ERROR,
+							"Erro ao autenticar seus dados",
+							"Os dados inseridos ou são inválidos ou estão incorretos");
 					throw new DadosInvalidos("Erro ao autenticar suas credenciais.");
 				}
 			}

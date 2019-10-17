@@ -3,6 +3,7 @@ package br.edu.ifmt.cba.agenda.gui.view;
 import java.io.IOException;
 
 import br.edu.ifmt.cba.agenda.gui.enums.Path;
+import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +26,7 @@ public class Principal extends Application{
 			stage.show();
 		} 
 		catch (IOException e) {
-			e.printStackTrace();
+			throw new ViewException("Erro ao tentar startar a tela Principal.");
 		}	
 
 	}

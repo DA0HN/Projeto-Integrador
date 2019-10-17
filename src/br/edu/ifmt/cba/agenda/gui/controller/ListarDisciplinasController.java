@@ -22,7 +22,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class ListarDisciplinasController implements Initializable {	
-    
+    /*
+     * IMPLEMENTADO ListarDisciplinas
+     * */
     @FXML private TableView<Disciplina> tableDisciplinas;
     @FXML private TableColumn<Disciplina, String> columnDisciplina;
     @FXML private Label labelNomeDaDisciplina;
@@ -44,6 +46,7 @@ public class ListarDisciplinasController implements Initializable {
 	private void selecionarDisciplina(Disciplina d) {
 		d = tableDisciplinas.getSelectionModel().getSelectedItem();
 		if( d != null ){
+			System.out.println(d);
 			labelNomeDaDisciplina.setText(d.getNome());
 			labelNomeDoProfessor.setText(d.getProfessor());
 			labelNumeroDeFaltas.setText(String.valueOf(d.getFaltas()));

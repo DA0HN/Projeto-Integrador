@@ -122,7 +122,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 	
-	public void matricularEmDisciplina(Aluno aluno, Disciplina disciplina) {
+	public boolean matricularEmDisciplina(Aluno aluno, Disciplina disciplina) {
 		/* para que o relacionamento entre aluno e disciplina seja feito
 		 * a disciplina em questão tem que estar cadastrada no banco de dados,
 		 * caso contrário não é possivel criar a relação de matricula*/
@@ -145,9 +145,10 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 					
 					HistoricoAlunoService.matricularEmDisciplina(aluno, disciplina);
 				}
+				return true;
 			}
 			else {
-				throw new DadosInvalidos("Não foi possivel fazer a matricula nessa disciplina.");
+				return false;
 			}
 		}
 		catch(SQLException e) {
