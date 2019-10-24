@@ -1,9 +1,11 @@
 package br.edu.ifmt.cba.agenda.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
+import br.edu.ifmt.cba.agenda.model.entities.Nota;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
 
 public class UsuarioAtual {
@@ -32,6 +34,14 @@ public class UsuarioAtual {
 		popularMedia();
 	}
 	
+	public static List<Nota> atualizaNotasDaDisciplina(Disciplina disciplina){
+		List<Nota> lista = new ArrayList<Nota>();
+		
+		lista = DaoFactory.createHistoricoDao().findNotasByDisciplina(UsuarioAtual.getUsuario(), disciplina);
+		
+		return lista;
+	}
+	
 	private static void atualizaDisciplinas() {
 		usuario.setDisciplinas( DaoFactory.createHistoricoDao().findDisciplinasByAluno(usuario.getId()) );
 	}
@@ -40,7 +50,6 @@ public class UsuarioAtual {
 		List<Disciplina> lista = UsuarioAtual.usuario.getDisciplinas();
 		for(Disciplina d : lista) {
 			d.calcularMedia();	
-//			System.out.println(d.getMedia());
 		}
 	}
 
@@ -50,7 +59,6 @@ public class UsuarioAtual {
 		}
 		List<Disciplina> lista = UsuarioAtual.usuario.getDisciplinas();
 		for(Disciplina d : lista) {
-//			System.out.println(d);
 			d.setNotas( DaoFactory.createHistoricoDao().findNotasByDisciplina(usuario, d));
 		}
 	}
@@ -61,7 +69,6 @@ public class UsuarioAtual {
 		}
 		List<Disciplina> lista = UsuarioAtual.usuario.getDisciplinas();
 		for(Disciplina d : lista) {
-//			System.out.println(d);
 			d.setFaltas( DaoFactory.createHistoricoDao().getFalta(usuario, d) );
 		}
 	}

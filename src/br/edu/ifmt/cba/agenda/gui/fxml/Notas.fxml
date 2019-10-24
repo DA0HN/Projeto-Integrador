@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,21 +16,12 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="tableDisciplinas" layoutX="-3.0" layoutY="-1.0" prefHeight="462.0" prefWidth="212.0">
-                    <columns>
-                      <TableColumn fx:id="columnDisciplina" editable="false" prefWidth="134.0" text="Disciplina" />
-                      <TableColumn fx:id="columnMedia" editable="false" prefWidth="75.0" text="Média" />
-                    </columns>
-                  </TableView>
+                  <TableView fx:id="tableDisciplinas" layoutX="-3.0" layoutY="-1.0" prefHeight="460.0" prefWidth="206.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="508.0">
                <children>
-                  <TableView fx:id="tableNotas" layoutX="36.0" layoutY="90.0" prefHeight="280.0" prefWidth="184.0">
-                     <columns>
-                        <TableColumn fx:id="columnNotas" prefWidth="183.0" text="Notas" />
-                     </columns>
-                  </TableView>
+                  <TableView fx:id="tableNotas" layoutX="36.0" layoutY="90.0" prefHeight="280.0" prefWidth="190.0" />
                   <Label fx:id="labelNomeDisciplina" alignment="CENTER" contentDisplay="CENTER" layoutX="-4.0" layoutY="25.0" lineSpacing="10.0" prefHeight="36.0" prefWidth="495.0" textAlignment="CENTER" AnchorPane.bottomAnchor="399.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="25.0">
                      <font>
                         <Font size="24.0" />

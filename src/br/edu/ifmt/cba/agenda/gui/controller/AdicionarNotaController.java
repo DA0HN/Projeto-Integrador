@@ -27,9 +27,7 @@ public class AdicionarNotaController implements Initializable{
 	@FXML private TextField txNota;
     @FXML private Button btAdicionar;
     
-    @Override public void initialize(URL arg0, ResourceBundle arg1) {
-    	
-    }
+    @Override public void initialize(URL arg0, ResourceBundle arg1) {}
 
 	@FXML void btAdicionarOnClicked(MouseEvent event) {
     	adicionarNota();
@@ -73,7 +71,7 @@ public class AdicionarNotaController implements Initializable{
     	c.trocarAnchorPane(Path.NOTAS.getValue());
     	NotasController n = (NotasController) c.getViewController();
     	UsuarioAtual.atualizarDados();
-    	n.disciplinaSelecionada(disciplina);
+    	n.atualizar();
     }
     
     private void fechar() {

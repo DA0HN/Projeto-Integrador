@@ -3,6 +3,8 @@ package br.edu.ifmt.cba.agenda.model.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifmt.cba.agenda.model.service.FormatarNumero;
+
 public class Disciplina {
 
 	private Integer id;
@@ -46,7 +48,7 @@ public class Disciplina {
 			soma += d.getNota();
 			//System.out.println(soma);
 		}
-		return soma/notas.size(); 
+		return FormatarNumero.format(soma/notas.size());
 	}
 
 	public void setMedia(Double media) {
