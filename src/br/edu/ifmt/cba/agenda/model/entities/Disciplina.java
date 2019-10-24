@@ -46,7 +46,7 @@ public class Disciplina {
 			soma += d.getNota();
 			//System.out.println(soma);
 		}
-		return soma/notas.size();
+		return soma/notas.size(); 
 	}
 
 	public void setMedia(Double media) {

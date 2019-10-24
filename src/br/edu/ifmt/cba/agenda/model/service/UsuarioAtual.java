@@ -18,33 +18,39 @@ public class UsuarioAtual {
 		if( UsuarioAtual.usuario != null ) {
 			throw new IllegalStateException("Não é possivel alterar o usuário atual");
 		}
-		usuario.setDisciplinas( DaoFactory.createHistoricoDao().findDisciplinasByAluno(usuario.getId()));
 		UsuarioAtual.usuario = usuario;
+		atualizaDisciplinas();
 		popularNotas();
 		popularFaltas();
 		popularMedia();
 	}
 	
 	public static void atualizarDados() {
+		atualizaDisciplinas();
 		popularNotas();
 		popularFaltas();
 		popularMedia();
 	}
 	
+	private static void atualizaDisciplinas() {
+		usuario.setDisciplinas( DaoFactory.createHistoricoDao().findDisciplinasByAluno(usuario.getId()) );
+	}
+
 	private static void popularMedia() {
 		List<Disciplina> lista = UsuarioAtual.usuario.getDisciplinas();
 		for(Disciplina d : lista) {
 			d.calcularMedia();	
-			//System.out.println(d.getMedia());
+//			System.out.println(d.getMedia());
 		}
 	}
 
-	private static void popularNotas() {
+	public static void popularNotas() {
 		if( UsuarioAtual.usuario == null ) {
 			throw new IllegalStateException("Erro ao popular notas");
 		}
 		List<Disciplina> lista = UsuarioAtual.usuario.getDisciplinas();
 		for(Disciplina d : lista) {
+//			System.out.println(d);
 			d.setNotas( DaoFactory.createHistoricoDao().findNotasByDisciplina(usuario, d));
 		}
 	}
@@ -55,9 +61,9 @@ public class UsuarioAtual {
 		}
 		List<Disciplina> lista = UsuarioAtual.usuario.getDisciplinas();
 		for(Disciplina d : lista) {
+//			System.out.println(d);
 			d.setFaltas( DaoFactory.createHistoricoDao().getFalta(usuario, d) );
 		}
-		
 	}
 
 	public static void terminarSessao() {

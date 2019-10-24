@@ -26,7 +26,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		MATRICULAR_ALUNO_EM_DISCIPLINA("insert into historicoAluno (id_aluno,id_disciplina) value (?,?)"),
 		SAVE_FALTA("update historicoAluno set faltas=? where id_aluno=? and id_disciplina=?"),
 		SAVE_NOTA("insert into notas (id_aluno, id_disciplina, nota) value (?,?,?)"),	// só salva notas se for em uma matéria que o aluno frequenta
-		DELETE_NOTAS_BY_ID("delete from notas where id=?"),
+		DELETE_NOTAS_BY_ID("delete from notas where id=? and id_disciplina=? and id_aluno=?"),
 		REMOVE_FALTA_BY_ID(""),
 		FIND_DISCIPLINA_BY_ALUNO("select id_disciplina from historicoAluno where id_aluno in(?)"),
 		FIND_FALTA("select faltas from historicoAluno where id_aluno in(?) and id_disciplina in(?)"),
@@ -122,7 +122,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 	
-	public boolean matricularEmDisciplina(Aluno aluno, Disciplina disciplina) {
+	public Boolean matricularEmDisciplina(Aluno aluno, Disciplina disciplina) {
 		/* para que o relacionamento entre aluno e disciplina seja feito
 		 * a disciplina em questão tem que estar cadastrada no banco de dados,
 		 * caso contrário não é possivel criar a relação de matricula*/
@@ -159,7 +159,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 	
-	@Override public void saveNota(Aluno a, Disciplina d, Double nota) {
+	@Override public Boolean saveNota(Aluno a, Disciplina d, Double nota) {
 		PreparedStatement st = null;
 		try {
 			if( verificaHistorico(a.getId(), d.getId())) {
@@ -177,9 +177,10 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 						n.setId(rs.getInt(1));
 						n.setNota(nota);
 						d.getNotas().add(n);
+						return true;
 					}
 				}
-				
+				return false;
 			}
 			else {
 				throw new DadosInvalidos("O aluno " + a.getNome() + " não está matriculado na disciplina " + d.getNome() +" .");
@@ -194,7 +195,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 
-	@Override public void saveFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
+	@Override public Boolean saveFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
 		PreparedStatement st = null;
 		try {
 			if( verificaHistorico(aluno.getId(), disciplina.getId())) {
@@ -211,10 +212,9 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 				var linha = st.executeUpdate();
 				if( linha > 0 ) {
 					System.out.println("Sucesso na atualização de faltas! Numero de linhas alteradas: " + linha);
+					return true;
 				}
-				else {
-					throw new DatabaseException("Não foi possivel executar a atualização de suas faltas.");
-				}
+				return false;
 			}
 			else {
 				throw new DadosInvalidos("O aluno " + aluno.getNome() + " não está matriculado na disciplina " + disciplina.getNome() +" .");
@@ -228,12 +228,19 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 
-	@Override public void deleteNota(Nota nota) {
+	@Override public Boolean deleteNota(Aluno aluno, Disciplina disciplina, Nota nota) {
 		PreparedStatement st = null;
 		try {
 			st = conexao.prepareStatement(HistoricoSQL.DELETE_NOTAS_BY_ID.getValue());
 			st.setInt(1, nota.getId());
-			st.executeUpdate();
+			st.setInt(2, disciplina.getId());
+			st.setInt(3, aluno.getId());
+			var linha = st.executeUpdate();
+			
+			if( linha > 0) {
+				return true;
+			}
+			return false;
 		}
 		catch(SQLException e) {
 			throw new DatabaseException( e.getMessage() );
@@ -243,8 +250,8 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 
-	@Override public void deleteFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
-		saveFalta(aluno, disciplina, (-falta));
+	@Override public Boolean deleteFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
+		return saveFalta(aluno, disciplina, (-falta));
 	}
 
 	@Override public List<Nota> findNotasByDisciplina(Aluno aluno, Disciplina disciplina) {

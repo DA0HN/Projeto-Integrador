@@ -2,6 +2,7 @@ package br.edu.ifmt.cba.agenda.gui.view;
 
 import java.io.IOException;
 
+import br.edu.ifmt.cba.agenda.gui.controller.PrincipalController;
 import br.edu.ifmt.cba.agenda.gui.enums.Path;
 import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
 import javafx.application.Application;
@@ -13,11 +14,15 @@ import javafx.stage.Stage;
 public class Principal extends Application{
 	
 	private static Stage stage;
+	private static PrincipalController controller;
+	
 	
 	@Override public void start(Stage stage) {
 		try {
 			setStage(stage);
-			Parent root = FXMLLoader.load(getClass().getResource(Path.PRINCIPAL.getValue()));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(Path.PRINCIPAL.getValue()));
+			Parent root = loader.load();
+			controller = loader.getController();
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource(Path.STYLE.getValue()).toExternalForm());
 			stage.setTitle("Principal");
@@ -30,10 +35,15 @@ public class Principal extends Application{
 		}	
 
 	}
+	
 	public static Stage getStage() {
 		return stage;
 	}
-
+	
+	public static PrincipalController getPrincipalController() {
+		return controller;
+	}
+	
 	public static void setStage(Stage stage) {
 		Principal.stage = stage;
 	}

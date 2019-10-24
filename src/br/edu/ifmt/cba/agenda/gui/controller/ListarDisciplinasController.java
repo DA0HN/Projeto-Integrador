@@ -9,8 +9,6 @@ import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.recurso.DisciplinaRecurso;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
 import br.edu.ifmt.cba.agenda.model.service.UsuarioAtual;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
 public class ListarDisciplinasController implements Initializable {	
     /*
@@ -46,7 +43,6 @@ public class ListarDisciplinasController implements Initializable {
 	private void selecionarDisciplina(Disciplina d) {
 		d = tableDisciplinas.getSelectionModel().getSelectedItem();
 		if( d != null ){
-			System.out.println(d);
 			labelNomeDaDisciplina.setText(d.getNome());
 			labelNomeDoProfessor.setText(d.getProfessor());
 			labelNumeroDeFaltas.setText(String.valueOf(d.getFaltas()));

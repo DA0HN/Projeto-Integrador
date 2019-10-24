@@ -42,7 +42,7 @@ public class AlunoRecurso implements AlunoDao {
 		this.conexao = conexao;
 	}
 
-	@Override public void save(Aluno a) {
+	@Override public boolean save(Aluno a) {
 		PreparedStatement st = null;
 		try {
 			st = conexao.prepareStatement(AlunoSQL.SAVE.getValue(), Statement.RETURN_GENERATED_KEYS);
@@ -62,7 +62,9 @@ public class AlunoRecurso implements AlunoDao {
 					a.setId(id);
 				}
 				Database.closeResultSet(rs);
+				return true;
 			}
+			return false;
 		}
 		catch( SQLException e) {
 			throw new DatabaseException("Erro ao executar SAVE -> " + e.getMessage() );

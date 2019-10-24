@@ -11,6 +11,9 @@ public enum Path {
 	HORARIOS("../fxml/Horarios.fxml"),
 	CRIA_CONTA("../fxml/CriaConta.fxml"),
 	CRIA_VINCULO("../fxml/VincularDisciplina.fxml"),
+	ADICIONAR_NOTA("../fxml/AdicionarNota.fxml"),
+	//REMOVER_NOTA("../fxml/crudNotas/RemoverNota.fxml"),
+	//ALTERAR_NOTA("../fxml/crudNotas/AlterarNota.fxml"),
 	STYLE("../style/modena_dark.css");
 	
 	private String value;

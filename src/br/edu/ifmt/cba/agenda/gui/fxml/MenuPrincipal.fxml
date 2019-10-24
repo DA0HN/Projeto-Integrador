@@ -40,7 +40,7 @@
                      </font></Label>
                </children>
             </GridPane>
-            <Button fx:id="btVincularDisciplina" layoutX="482.0" layoutY="405.0" mnemonicParsing="false" onKeyPressed="#btVincularAlunoOnKeyPressed" onMouseClicked="#btVincularAlunoOnKeyClicked" text="Matricular-se em uma disciplina" />
+            <Button fx:id="btVincularDisciplina" layoutX="475.0" layoutY="399.0" mnemonicParsing="false" onKeyPressed="#btVincularAlunoOnKeyPressed" onMouseClicked="#btVincularAlunoOnKeyClicked" text="Matricular-se em uma disciplina" />
             <Label layoutX="281.0" layoutY="83.0" text="Dados do usuário">
                <font>
                   <Font size="20.0" />

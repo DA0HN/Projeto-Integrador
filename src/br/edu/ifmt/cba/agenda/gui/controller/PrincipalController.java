@@ -26,6 +26,7 @@ public class PrincipalController implements Initializable{
     @FXML private Button btCadastrarDisciplina; 
     
     @FXML private AnchorPane principalController;
+	private Object viewController;
 	
     @FXML public void handleButtonDisciplina() {
     	trocarAnchorPane(Path.LISTAR_DISCIPLINAS.getValue());
@@ -45,7 +46,9 @@ public class PrincipalController implements Initializable{
     
     public void trocarAnchorPane(String str) {
     	try {
-			AnchorPane newAnchorPane = (AnchorPane) FXMLLoader.load(getClass().getResource(str));
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource(str));
+			AnchorPane newAnchorPane = (AnchorPane) loader.load();
+			setViewController(loader.getController());
 			principalController.getChildren().setAll(newAnchorPane);
 		} catch (IOException e) {
 			throw new ViewException( e.getMessage() );
@@ -61,7 +64,15 @@ public class PrincipalController implements Initializable{
     public static void fecha() {
     	Principal.getStage().close();
     }
-    
-    @Override public void initialize(URL arg0, ResourceBundle arg1) {}
+	
+	public Object getViewController() {
+		return viewController;
+	}
+
+	public void setViewController(Object viewController) {
+		this.viewController = viewController;
+	}
+
+	@Override public void initialize(URL arg0, ResourceBundle arg1) {}
     
 }
