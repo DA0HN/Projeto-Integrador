@@ -27,6 +27,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		SAVE_FALTA("update historicoAluno set faltas=? where id_aluno=? and id_disciplina=?"),
 		SAVE_NOTA("insert into notas (id_aluno, id_disciplina, nota) value (?,?,?)"),	// só salva notas se for em uma matéria que o aluno frequenta
 		DELETE_NOTAS_BY_ID("delete from notas where id=? and id_disciplina=? and id_aluno=?"),
+		UPDATE_NOTA("update notas set nota=? where id=? and id_aluno=? and id_disciplina=?"),
 		REMOVE_FALTA_BY_ID(""),
 		FIND_DISCIPLINA_BY_ALUNO("select id_disciplina from historicoAluno where id_aluno in(?)"),
 		FIND_FALTA("select faltas from historicoAluno where id_aluno in(?) and id_disciplina in(?)"),
@@ -195,6 +196,36 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 		}
 	}
 
+	@Override public Boolean updateNota(Aluno a, Disciplina d, Integer idNota, Double novaNota) {
+		PreparedStatement st = null;
+		try {
+			if( verificaHistorico( a.getId(), d.getId() ) ){
+				st = conexao.prepareStatement(HistoricoSQL.UPDATE_NOTA.getValue() );
+				st.setDouble(1, novaNota);
+				st.setInt(2, idNota);
+				st.setInt(3, a.getId());
+				st.setInt(4, d.getId());
+				
+				var linha = st.executeUpdate();
+				
+				if( linha > 0) {
+					return true;
+				}
+				return false;
+			}
+			else {
+				throw new DadosInvalidos("O aluno " + a.getNome() + " não está matriculado na disciplina " + d.getNome() +" ."); 
+			}
+		}
+		
+		catch(SQLException e) {
+			throw new DatabaseException( e.getMessage() );
+		}
+		finally {
+			Database.closeStatement(st);
+		}
+	}
+	
 	@Override public Boolean saveFalta(Aluno aluno, Disciplina disciplina, Integer falta) {
 		PreparedStatement st = null;
 		try {

@@ -46,9 +46,17 @@ public class Disciplina {
 		Double soma = 0d;
 		for(Nota d : notas ) {
 			soma += d.getNota();
-			//System.out.println(soma);
 		}
-		return FormatarNumero.format(soma/notas.size());
+		
+		Double media = soma/notas.size();
+		System.out.println(media);
+		
+		if( !media.isNaN() ) {
+			return FormatarNumero.format(media);
+		}
+		else {
+			return 0d;
+		}
 	}
 
 	public void setMedia(Double media) {

@@ -34,4 +34,8 @@ public class ViewFactory {
 		return new Notas();
 	}
 	
+	public static AlterarNota createAlterarNota() {
+		return new AlterarNota();
+	}
+	
 }

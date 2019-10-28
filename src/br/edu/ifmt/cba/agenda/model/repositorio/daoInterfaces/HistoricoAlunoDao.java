@@ -12,6 +12,7 @@ public interface HistoricoAlunoDao {
 	Boolean saveFalta(Aluno aluno, Disciplina disciplina, Integer falta);
 	Boolean deleteNota(Aluno aluno, Disciplina disciplina, Nota nota);
 	Boolean deleteFalta(Aluno aluno, Disciplina disciplina, Integer falta);
+	Boolean updateNota(Aluno aluno, Disciplina disciplina, Integer idNota ,Double nota);
 	Integer getFalta(Aluno aluno, Disciplina disciplina);
 	List<Nota> findNotasByDisciplina(Aluno aluno, Disciplina disciplina);
 	public List<Disciplina> findDisciplinasByAluno(Integer id);

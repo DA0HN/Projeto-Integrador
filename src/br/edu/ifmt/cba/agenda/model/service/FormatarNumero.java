@@ -13,5 +13,6 @@ public class FormatarNumero {
 		/*
 		 * setScale retorna uma String formatada, para converter para Double utiliza-se .doubleValue() */	
 		return bd.setScale(3, RoundingMode.HALF_EVEN).doubleValue();
+//		return arg;
 	}
 }

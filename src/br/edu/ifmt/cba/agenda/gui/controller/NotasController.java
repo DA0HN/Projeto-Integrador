@@ -118,9 +118,13 @@ public class NotasController implements Initializable{
     	adicionarNota();
     }
     @FXML void btAlterarOnClicked(MouseEvent event) {
+    	alterarNota();
     }
-    @FXML void btAlterarOnKeyPressed(KeyEvent event) {
-    	System.out.println(notaAtual);
+    
+	@FXML void btAlterarOnKeyPressed(KeyEvent event) {
+    	if( ButtonEvent.hasUserConfirmed(event) ) {
+    		alterarNota();
+    	}
 
     }
     @FXML void btExcluirOnClicked(MouseEvent event) {
@@ -160,8 +164,8 @@ public class NotasController implements Initializable{
 	}
 	
 	public void atualizar() {
-		atualizaTableNotas();
 		var d = getDisciplinaAtual();
+		atualizaTableNotas();
 		setDisciplinaAtual(null);
 		setNotaAtual(null);
 		atualizaTableDisciplina();
@@ -174,6 +178,13 @@ public class NotasController implements Initializable{
 			if( d.getId() == disciplina.getId()) return d;
 		}
 		return null;
+	}
+	
+	private void alterarNota() {
+    	var view = ViewFactory.createAlterarNota();
+    	view.start(new Stage());
+    	view.getController().setDisciplina(getDisciplinaAtual());
+    	view.getController().setNota(getNotaAtual());
 	}
 	
 	private void adicionarNota() {
