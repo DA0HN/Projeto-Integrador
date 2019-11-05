@@ -6,9 +6,9 @@ import java.util.ResourceBundle;
 
 import br.edu.ifmt.cba.agenda.database.DatabaseException;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
-import br.edu.ifmt.cba.agenda.model.recurso.DisciplinaRecurso;
+import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
-import br.edu.ifmt.cba.agenda.model.service.UsuarioAtual;
+import br.edu.ifmt.cba.agenda.model.service.DisciplinaRecurso;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

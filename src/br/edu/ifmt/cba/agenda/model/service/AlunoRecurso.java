@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.model.recurso;
+package br.edu.ifmt.cba.agenda.model.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,9 +1,9 @@
 package br.edu.ifmt.cba.agenda.model.repositorio;
 
 import br.edu.ifmt.cba.agenda.database.Database;
-import br.edu.ifmt.cba.agenda.model.recurso.AlunoRecurso;
-import br.edu.ifmt.cba.agenda.model.recurso.DisciplinaRecurso;
-import br.edu.ifmt.cba.agenda.model.recurso.HistoricoAlunoRecurso;
+import br.edu.ifmt.cba.agenda.model.service.AlunoRecurso;
+import br.edu.ifmt.cba.agenda.model.service.DisciplinaRecurso;
+import br.edu.ifmt.cba.agenda.model.service.HistoricoAlunoRecurso;
 
 public class DaoFactory {
 	

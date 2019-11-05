@@ -9,7 +9,7 @@ import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
 import br.edu.ifmt.cba.agenda.gui.view.Login;
 import br.edu.ifmt.cba.agenda.gui.view.Principal;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
-import br.edu.ifmt.cba.agenda.model.service.UsuarioAtual;
+import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

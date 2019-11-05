@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.model.service;
+package br.edu.ifmt.cba.agenda.model.recurso;
 
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 

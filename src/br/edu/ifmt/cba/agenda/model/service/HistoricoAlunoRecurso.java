@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.model.recurso;
+package br.edu.ifmt.cba.agenda.model.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +14,9 @@ import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Nota;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
+import br.edu.ifmt.cba.agenda.model.recurso.HistoricoAlunoService;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
 import br.edu.ifmt.cba.agenda.model.repositorio.daoInterfaces.HistoricoAlunoDao;
-import br.edu.ifmt.cba.agenda.model.service.HistoricoAlunoService;
 
 public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 

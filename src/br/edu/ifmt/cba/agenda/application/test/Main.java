@@ -1,8 +1,8 @@
 package br.edu.ifmt.cba.agenda.application.test;
 
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
+import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
 import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
-import br.edu.ifmt.cba.agenda.model.service.UsuarioAtual;
 
 public class Main {
 

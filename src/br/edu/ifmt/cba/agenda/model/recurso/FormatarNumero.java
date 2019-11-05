@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.model.service;
+package br.edu.ifmt.cba.agenda.model.recurso;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
