@@ -54,7 +54,13 @@ public class AdicionarNotaController implements Initializable{
     		Alerta.mostrar(AlertType.ERROR, "Nenhuma disciplina selecionada", "nenhuma disciplina foi selecionada para adicionar a nova nota.");
     		fechar();
     	}
+    	
+    	if( txNota.getText().equals("") || txNota.getText().isBlank() || txNota.getText().isEmpty() ) {
+    		return;
+    	}
+    	
     	Double nota = Double.parseDouble(txNota.getText()); 
+    	
     	
     	if( nota != null && ( nota >= 0 && nota <= 10) ) {
     		boolean isSave = DaoFactory.createHistoricoDao().saveNota(UsuarioAtual.getUsuario(), disciplina, nota);

@@ -20,4 +20,11 @@ public class Constraints {
 		});
 	}
 	
+	public static void setEmptyField(TextField txt) {
+		txt.textProperty().addListener( (obs, oldValue, newValue) -> {
+			if( newValue != null && (newValue.isBlank() || newValue.isEmpty()) )
+				txt.setText(oldValue);
+		});
+	}
+	
 }
