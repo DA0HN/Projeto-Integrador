@@ -9,7 +9,7 @@ import br.edu.ifmt.cba.agenda.gui.view.CriaConta;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -70,7 +70,7 @@ public class CriaContaController implements Initializable {
         		}
     			Aluno novoUsuario = new Aluno(nome, matricula, senha, email);
     			
-    			if (DaoFactory.createAlunoDao().save(novoUsuario)) {
+    			if (ServiceFactory.createAlunoDao().save(novoUsuario)) {
     				buildLogin();
 					Alerta.mostrar(AlertType.INFORMATION, "Sucesso", "Sucesso ao criar novo usuário");
 				}else {

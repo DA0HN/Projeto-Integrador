@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
-import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
+import br.edu.ifmt.cba.agenda.model.resource.UsuarioAtual;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

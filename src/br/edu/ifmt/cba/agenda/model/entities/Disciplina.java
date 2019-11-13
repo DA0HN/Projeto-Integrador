@@ -3,7 +3,7 @@ package br.edu.ifmt.cba.agenda.model.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.ifmt.cba.agenda.model.recurso.FormatarNumero;
+import br.edu.ifmt.cba.agenda.model.resource.FormatarNumero;
 
 public class Disciplina {
 

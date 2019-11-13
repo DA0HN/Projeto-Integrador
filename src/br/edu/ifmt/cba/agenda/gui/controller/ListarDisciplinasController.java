@@ -6,9 +6,9 @@ import java.util.ResourceBundle;
 
 import br.edu.ifmt.cba.agenda.database.DatabaseException;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
-import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
-import br.edu.ifmt.cba.agenda.model.service.DisciplinaRecurso;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
+import br.edu.ifmt.cba.agenda.model.resource.UsuarioAtual;
+import br.edu.ifmt.cba.agenda.model.service.DisciplinaService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ public class ListarDisciplinasController implements Initializable {
     @FXML private Label labelNumeroDeAulas;
     @FXML private Label labelNumeroDeFaltas;
     
-    private DisciplinaRecurso dao = DaoFactory.createDisciplinaDao();
+    private DisciplinaService dao = ServiceFactory.createDisciplinaDao();
     
 	private ObservableList<Disciplina> observableDisciplina;
     

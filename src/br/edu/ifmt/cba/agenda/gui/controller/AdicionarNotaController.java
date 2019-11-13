@@ -3,15 +3,15 @@ package br.edu.ifmt.cba.agenda.gui.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.edu.ifmt.cba.agenda.gui.constraints.Constraints;
 import br.edu.ifmt.cba.agenda.gui.enums.Path;
 import br.edu.ifmt.cba.agenda.gui.utils.Alerta;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.AdicionarNota;
 import br.edu.ifmt.cba.agenda.gui.view.Principal;
-import br.edu.ifmt.cba.agenda.model.constraints.Constraints;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
-import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
+import br.edu.ifmt.cba.agenda.model.resource.UsuarioAtual;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -63,7 +63,7 @@ public class AdicionarNotaController implements Initializable{
     	
     	
     	if( nota != null && ( nota >= 0 && nota <= 10) ) {
-    		boolean isSave = DaoFactory.createHistoricoDao().saveNota(UsuarioAtual.getUsuario(), disciplina, nota);
+    		boolean isSave = ServiceFactory.createHistoricoDao().saveNota(UsuarioAtual.getUsuario(), disciplina, nota);
     		if( isSave ) {
     			Alerta.mostrar(AlertType.INFORMATION, "Sucesso", "Sucesso ao salvar a nota " + nota + " na disciplina de " + disciplina.getNome());
     		}

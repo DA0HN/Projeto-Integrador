@@ -10,9 +10,9 @@ import br.edu.ifmt.cba.agenda.gui.view.Login;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
-import br.edu.ifmt.cba.agenda.model.recurso.AutenticadorDeUsuario;
-import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
+import br.edu.ifmt.cba.agenda.model.resource.AutenticadorDeUsuario;
+import br.edu.ifmt.cba.agenda.model.resource.UsuarioAtual;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -88,7 +88,7 @@ public class LoginController implements Initializable{
 		Aluno aluno = null;
 		try {
 			if( AutenticadorDeUsuario.validaEntradas(login, senha) ) {
-				aluno = DaoFactory.createAlunoDao().findByMatricula(login);
+				aluno = ServiceFactory.createAlunoDao().findByMatricula(login);
 			}
 			else {
 				Alerta.mostrar(AlertType.ERROR,

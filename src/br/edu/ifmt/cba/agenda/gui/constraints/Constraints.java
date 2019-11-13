@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.model.constraints;
+package br.edu.ifmt.cba.agenda.gui.constraints;
 
 import javafx.scene.control.TextField;
 

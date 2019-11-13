@@ -9,8 +9,8 @@ import br.edu.ifmt.cba.agenda.gui.utils.Alerta;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.VincularDisciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
-import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
+import br.edu.ifmt.cba.agenda.model.resource.UsuarioAtual;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -35,13 +35,13 @@ public class VincularDisciplinasController implements Initializable {
 	}
 
     private void carregarTodasDisciplinas() {
-    	todasDisciplinas = DaoFactory.createDisciplinaDao().findAll();
+    	todasDisciplinas = ServiceFactory.createDisciplinaDao().findAll();
     	observableDisciplina = FXCollections.observableArrayList(todasDisciplinas);
     	comboDisciplinas.setItems(observableDisciplina);
     }
 
     private void vincularDisciplina(Disciplina d) {
-    	if(DaoFactory.createHistoricoDao().matricularEmDisciplina(UsuarioAtual.getUsuario(), d)) {
+    	if(ServiceFactory.createHistoricoDao().matricularEmDisciplina(UsuarioAtual.getUsuario(), d)) {
     		fechar();
     		Alerta.mostrar(AlertType.INFORMATION, "Sucesso ao vincular a disciplina", "Disciplina vinculada ao usuario " + UsuarioAtual.getUsuario().getNome() + " com sucesso.");
     	}

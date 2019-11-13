@@ -11,9 +11,9 @@ import java.util.List;
 import br.edu.ifmt.cba.agenda.database.Database;
 import br.edu.ifmt.cba.agenda.database.DatabaseException;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
-import br.edu.ifmt.cba.agenda.model.repositorio.daoInterfaces.DisciplinaDao;
+import br.edu.ifmt.cba.agenda.model.repository.interfaces.DisciplinaDatabase;
 
-public class DisciplinaRecurso implements DisciplinaDao {
+public class DisciplinaService implements DisciplinaDatabase {
 
 	protected enum DisciplinaSQL {
 		
@@ -37,7 +37,7 @@ public class DisciplinaRecurso implements DisciplinaDao {
 	
 	private Connection conexao;
 	
-	public DisciplinaRecurso(Connection conexao) {
+	public DisciplinaService(Connection conexao) {
 		this.conexao = conexao;
 	}
 

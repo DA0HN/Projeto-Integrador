@@ -14,11 +14,11 @@ import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Nota;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
-import br.edu.ifmt.cba.agenda.model.recurso.HistoricoAlunoService;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
-import br.edu.ifmt.cba.agenda.model.repositorio.daoInterfaces.HistoricoAlunoDao;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
+import br.edu.ifmt.cba.agenda.model.repository.interfaces.HistoricoAlunoDatabase;
+import br.edu.ifmt.cba.agenda.model.resource.HistoricoAlunoResource;
 
-public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
+public class HistoricoAlunoService implements HistoricoAlunoDatabase {
 
 	protected enum HistoricoSQL{
 		
@@ -47,7 +47,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 	
 	private Connection conexao;
 	
-	public HistoricoAlunoRecurso(Connection conexao){
+	public HistoricoAlunoService(Connection conexao){
 		this.conexao = conexao;
 	}
 
@@ -84,7 +84,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
 			while( rs.next() ) {
-				disciplinas.add(DaoFactory.createDisciplinaDao().findById(rs.getInt("id_disciplina")));
+				disciplinas.add(ServiceFactory.createDisciplinaDao().findById(rs.getInt("id_disciplina")));
 			}
 			
 			return disciplinas;
@@ -144,7 +144,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 				if( linha > 0 ) {
 					System.out.println("Inserção feita com sucesso! numero de linhas alteradas: " + linha);
 					
-					HistoricoAlunoService.matricularEmDisciplina(aluno, disciplina);
+					HistoricoAlunoResource.matricularEmDisciplina(aluno, disciplina);
 				}
 				return true;
 			}
@@ -234,7 +234,7 @@ public class HistoricoAlunoRecurso implements HistoricoAlunoDao {
 				faltaDatabase += falta;
 				System.out.println(faltaDatabase);
 				
-				HistoricoAlunoService.atualizaFaltas(aluno, disciplina, falta);
+				HistoricoAlunoResource.atualizaFaltas(aluno, disciplina, falta);
 				
 				st = conexao.prepareStatement(HistoricoSQL.SAVE_FALTA.getValue());
 				st.setInt(1, faltaDatabase);

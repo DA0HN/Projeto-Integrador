@@ -1,11 +1,11 @@
-package br.edu.ifmt.cba.agenda.model.recurso;
+package br.edu.ifmt.cba.agenda.model.resource;
 
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Nota;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
 
-public abstract class HistoricoAlunoService {
+public abstract class HistoricoAlunoResource {
 	
 	public static void matricularEmDisciplina(Aluno aluno, Disciplina disciplina) {
 		try {

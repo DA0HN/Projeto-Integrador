@@ -3,16 +3,16 @@ package br.edu.ifmt.cba.agenda.gui.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.edu.ifmt.cba.agenda.gui.constraints.Constraints;
 import br.edu.ifmt.cba.agenda.gui.enums.Path;
 import br.edu.ifmt.cba.agenda.gui.utils.Alerta;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.AlterarNota;
 import br.edu.ifmt.cba.agenda.gui.view.Principal;
-import br.edu.ifmt.cba.agenda.model.constraints.Constraints;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Nota;
-import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
+import br.edu.ifmt.cba.agenda.model.resource.UsuarioAtual;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -54,7 +54,7 @@ public class AlterarNotaController implements Initializable{
     	Double novaNota = Double.parseDouble(txNota.getText());
     	
     	if( novaNota != null && (novaNota >= 0 && novaNota <= 10) ) {
-    		boolean isChanged = DaoFactory.createHistoricoDao().
+    		boolean isChanged = ServiceFactory.createHistoricoDao().
     				updateNota(UsuarioAtual.getUsuario(),
     						this.disciplina, this.nota.getId(), novaNota);
     		if( isChanged ) {

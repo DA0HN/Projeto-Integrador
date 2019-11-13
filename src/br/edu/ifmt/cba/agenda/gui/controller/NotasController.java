@@ -9,8 +9,8 @@ import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Nota;
-import br.edu.ifmt.cba.agenda.model.recurso.UsuarioAtual;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
+import br.edu.ifmt.cba.agenda.model.resource.UsuarioAtual;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -154,7 +154,7 @@ public class NotasController implements Initializable{
 		NotasController.notaAtual = notaAtual;
 	}
 	private void deletarNota() {
-		if( DaoFactory.createHistoricoDao().deleteNota(UsuarioAtual.getUsuario(), getDisciplinaAtual(), getNotaAtual()) ) {
+		if( ServiceFactory.createHistoricoDao().deleteNota(UsuarioAtual.getUsuario(), getDisciplinaAtual(), getNotaAtual()) ) {
 			Alerta.mostrar(AlertType.INFORMATION, "Sucesso", "Sucesso ao deletar a nota " + getNotaAtual() + " da disciplina "+ getDisciplinaAtual() );
 		}
 		else {

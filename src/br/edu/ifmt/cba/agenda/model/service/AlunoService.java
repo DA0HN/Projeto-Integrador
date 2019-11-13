@@ -11,9 +11,9 @@ import java.util.List;
 import br.edu.ifmt.cba.agenda.database.Database;
 import br.edu.ifmt.cba.agenda.database.DatabaseException;
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
-import br.edu.ifmt.cba.agenda.model.repositorio.daoInterfaces.AlunoDao;
+import br.edu.ifmt.cba.agenda.model.repository.interfaces.AlunoDatabase;
 
-public class AlunoRecurso implements AlunoDao {
+public class AlunoService implements AlunoDatabase {
 
 	protected enum AlunoSQL {
 
@@ -38,7 +38,7 @@ public class AlunoRecurso implements AlunoDao {
 	
 	private Connection conexao;
 	
-	public AlunoRecurso(Connection conexao) {
+	public AlunoService(Connection conexao) {
 		this.conexao = conexao;
 	}
 

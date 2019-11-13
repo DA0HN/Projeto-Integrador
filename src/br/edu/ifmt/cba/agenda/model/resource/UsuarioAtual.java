@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.model.recurso;
+package br.edu.ifmt.cba.agenda.model.resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Nota;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
 
 public class UsuarioAtual {
 
@@ -37,13 +37,13 @@ public class UsuarioAtual {
 	public static List<Nota> atualizaNotasDaDisciplina(Disciplina disciplina){
 		List<Nota> lista = new ArrayList<Nota>();
 		
-		lista = DaoFactory.createHistoricoDao().findNotasByDisciplina(UsuarioAtual.getUsuario(), disciplina);
+		lista = ServiceFactory.createHistoricoDao().findNotasByDisciplina(UsuarioAtual.getUsuario(), disciplina);
 		
 		return lista;
 	}
 	
 	private static void atualizaDisciplinas() {
-		usuario.setDisciplinas( DaoFactory.createHistoricoDao().findDisciplinasByAluno(usuario.getId()) );
+		usuario.setDisciplinas( ServiceFactory.createHistoricoDao().findDisciplinasByAluno(usuario.getId()) );
 	}
 
 	private static void popularMedia() {
@@ -59,7 +59,7 @@ public class UsuarioAtual {
 		}
 		List<Disciplina> lista = UsuarioAtual.usuario.getDisciplinas();
 		for(Disciplina d : lista) {
-			d.setNotas( DaoFactory.createHistoricoDao().findNotasByDisciplina(usuario, d));
+			d.setNotas( ServiceFactory.createHistoricoDao().findNotasByDisciplina(usuario, d));
 		}
 	}
 	
@@ -69,7 +69,7 @@ public class UsuarioAtual {
 		}
 		List<Disciplina> lista = UsuarioAtual.usuario.getDisciplinas();
 		for(Disciplina d : lista) {
-			d.setFaltas( DaoFactory.createHistoricoDao().getFalta(usuario, d) );
+			d.setFaltas( ServiceFactory.createHistoricoDao().getFalta(usuario, d) );
 		}
 	}
 
