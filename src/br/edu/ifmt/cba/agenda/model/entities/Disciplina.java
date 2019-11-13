@@ -3,6 +3,8 @@ package br.edu.ifmt.cba.agenda.model.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifmt.cba.agenda.model.resource.FormatarNumero;
+
 public class Disciplina {
 
 	private Integer id;
@@ -30,15 +32,42 @@ public class Disciplina {
 		this.numeroDeAulas = numeroDeAulas;
 	}
 
-	public Double getMedia() {
-		for(Nota d : notas ) {
-			media += d.getNota();
+	public void calcularMedia() {
+		Double resultado = calculo();
+		if( resultado.isNaN() ) {
+			this.media = 0d;
 		}
-		return media/notas.size();
+		else {
+			this.media = resultado;
+		}
+	}
+	
+	private Double calculo() {
+		Double soma = 0d;
+		for(Nota d : notas ) {
+			soma += d.getNota();
+		}
+		
+		Double media = soma/notas.size();
+		System.out.println(media);
+		
+		if( !media.isNaN() ) {
+			return FormatarNumero.format(media);
+		}
+		else {
+			return 0d;
+		}
 	}
 
 	public void setMedia(Double media) {
+		if( media.isNaN() ) {
+			this.media = 0d;
+		}
 		this.media = media;
+	}
+	
+	public Double getMedia() {
+		return this.media;
 	}
 	
 	public Integer getFaltas() {
@@ -89,9 +118,13 @@ public class Disciplina {
 		this.notas = notas;
 	}
 
-	@Override public String toString() {
+	public String mostrarDados() {
 		return "Disciplina [id=" + id + ", nome=" + nome + ", professor=" + professor + ", faltas=" + faltas
 				+ ", numeroDeAulas=" + numeroDeAulas + ", media=" + media + ", notas=" + notas + "]";
+	}
+	
+	@Override public String toString() {
+		return getNome();
 	}
 
 	@Override public int hashCode() {

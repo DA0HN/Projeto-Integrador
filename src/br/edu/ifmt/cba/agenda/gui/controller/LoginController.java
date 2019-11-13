@@ -4,15 +4,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
+import br.edu.ifmt.cba.agenda.gui.utils.Alerta;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.Login;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
+import br.edu.ifmt.cba.agenda.model.resource.AutenticadorDeUsuario;
+import br.edu.ifmt.cba.agenda.model.resource.UsuarioAtual;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -80,34 +82,29 @@ public class LoginController implements Initializable{
 		}
 	}
 	
-	private boolean verificaDados(String login, String senha) {
-		return (login.isBlank() || login.isEmpty()) && (senha.isBlank() || senha.isEmpty());
-	}
-	
 	public void autenticacao() {
 		String login = txLogin.getText();
 		String senha = txSenha.getText();
 		Aluno aluno = null;
 		try {
-			if( !verificaDados(login, senha) ) {
-				aluno = DaoFactory.createAlunoDao().findByMatricula(login);
+			if( AutenticadorDeUsuario.validaEntradas(login, senha) ) {
+				aluno = ServiceFactory.createAlunoDao().findByMatricula(login);
 			}
 			else {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Erro ao autenticar seus dados");
-				alert.setContentText("Os dados inseridos ou são inválidos ou estão incorretos");
-				alert.show();
+				Alerta.mostrar(AlertType.ERROR,
+						"Erro ao aunteticar seus dados",
+						"Os dados inseridos ou são inválidos ou estão incorretos.");
 				throw new DadosInvalidos("Erro ao autenticar suas credenciais.");
 			}
 			if( aluno != null ) {
-				if( aluno.getMatricula().equals(login) && aluno.getSenha().equals(senha) ) {
+				if( AutenticadorDeUsuario.autenticar(aluno, senha, login) ) {
+					UsuarioAtual.setUsuario(aluno);
 					login();
 				}
 				else {
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setTitle("Erro ao autenticar seus dados");
-					alert.setContentText("Os dados inseridos ou são inválidos ou estão incorretos");
-					alert.show();
+					Alerta.mostrar(AlertType.ERROR,
+							"Erro ao autenticar seus dados",
+							"Os dados inseridos ou são inválidos ou estão incorretos");
 					throw new DadosInvalidos("Erro ao autenticar suas credenciais.");
 				}
 			}

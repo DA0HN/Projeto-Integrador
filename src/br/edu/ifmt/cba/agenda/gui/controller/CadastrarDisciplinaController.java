@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +22,8 @@ public class CadastrarDisciplinaController implements Initializable{
     @FXML private Button btLimpar; 
     @FXML private Button btCadastrar;
     @FXML private AnchorPane cadastrarDisciplinaController;
+    
+    //private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
     
     @FXML void btLimparOnClicked(MouseEvent event) {
     	limparTextField();
@@ -61,7 +63,7 @@ public class CadastrarDisciplinaController implements Initializable{
     	Integer numeroAulas = Integer.parseInt(txNumeroAulas.getText());	
     	
     	var disciplina = new Disciplina(nomeDisciplina, nomeProfessor, numeroAulas);
-    	DaoFactory.createDisciplinaDao().save(disciplina);
+    	ServiceFactory.createDisciplinaDao().save(disciplina);
     	
     }
     

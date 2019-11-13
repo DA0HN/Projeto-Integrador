@@ -1,10 +1,10 @@
-package br.edu.ifmt.cba.agenda.model.repositorio.daoInterfaces;
+package br.edu.ifmt.cba.agenda.model.repository.interfaces;
 
 import java.util.List;
 
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 
-public interface DisciplinaDao {
+public interface DisciplinaDatabase {
 	
 	void save(Disciplina d);
 	void update(Disciplina d);
