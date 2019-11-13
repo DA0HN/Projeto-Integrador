@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.model.repositorio.daoInterfaces;
+package br.edu.ifmt.cba.agenda.model.repository.interfaces;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.entities.Nota;
 
-public interface HistoricoAlunoDao {
+public interface HistoricoAlunoDatabase {
 	
 	Boolean saveNota(Aluno aluno, Disciplina disciplina, Double nota);
 	Boolean saveFalta(Aluno aluno, Disciplina disciplina, Integer falta);
