@@ -7,8 +7,12 @@ public enum Path {
 	CADASTRAR_DISCIPLINAS("../fxml/CadastrarDisciplinas.fxml"), 
 	PRINCIPAL("../fxml/Principal.fxml"),
 	NOTAS("../fxml/Notas.fxml"),
+	MENU_PRINCIPAL("../fxml/MenuPrincipal.fxml"),
 	HORARIOS("../fxml/Horarios.fxml"),
 	CRIA_CONTA("../fxml/CriaConta.fxml"),
+	CRIA_VINCULO("../fxml/VincularDisciplina.fxml"),
+	ADICIONAR_NOTA("../fxml/AdicionarNota.fxml"),
+	ALTERAR_NOTA("../fxml/AlterarNota.fxml"),
 	STYLE("../style/modena_dark.css");
 	
 	private String value;

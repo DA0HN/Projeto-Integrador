@@ -3,17 +3,19 @@ package br.edu.ifmt.cba.agenda.gui.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.edu.ifmt.cba.agenda.gui.utils.Alerta;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.CriaConta;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
 import br.edu.ifmt.cba.agenda.model.entities.Aluno;
 import br.edu.ifmt.cba.agenda.model.exception.DadosInvalidos;
-import br.edu.ifmt.cba.agenda.model.repositorio.DaoFactory;
+import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -68,8 +70,13 @@ public class CriaContaController implements Initializable {
         		}
     			Aluno novoUsuario = new Aluno(nome, matricula, senha, email);
     			
-    			DaoFactory.createAlunoDao().save(novoUsuario);
-    			buildLogin();
+    			if (ServiceFactory.createAlunoDao().save(novoUsuario)) {
+    				buildLogin();
+					Alerta.mostrar(AlertType.INFORMATION, "Sucesso", "Sucesso ao criar novo usuário");
+				}else {
+					buildLogin();
+					Alerta.mostrar(AlertType.ERROR, "Ocorreu um erro", "Não foi possível criar o novo usuário");
+				}
     		}
     		else {
     			throw new IllegalStateException("Os dados inseridos não são válidos.");
