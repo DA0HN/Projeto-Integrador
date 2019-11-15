@@ -12,7 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class AlterarNota extends Application {
-	
 	private static Stage stage;
 	private AlterarNotaController controller;
 

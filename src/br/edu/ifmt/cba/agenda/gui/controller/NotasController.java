@@ -110,9 +110,7 @@ public class NotasController implements Initializable{
     
     // botoes da tela  
     @FXML void btAdicionarOnKeyPressed(KeyEvent event) {
-    	if( ButtonEvent.hasUserConfirmed(event) ) {
-    		adicionarNota();
-    	}
+    	if( ButtonEvent.hasUserConfirmed(event) ) adicionarNota();
     }
     @FXML void btAdicionarOnClicked(MouseEvent event) {
     	adicionarNota();
@@ -122,18 +120,14 @@ public class NotasController implements Initializable{
     }
     
 	@FXML void btAlterarOnKeyPressed(KeyEvent event) {
-    	if( ButtonEvent.hasUserConfirmed(event) ) {
-    		alterarNota();
-    	}
+    	if( ButtonEvent.hasUserConfirmed(event) ) alterarNota();
 
     }
     @FXML void btExcluirOnClicked(MouseEvent event) {
     	deletarNota();
     }
     @FXML void btExcluirOnKeyPressed(KeyEvent event) {
-    	if( ButtonEvent.hasUserConfirmed(event) ) {
-    		deletarNota();
-    	}
+    	if( ButtonEvent.hasUserConfirmed(event) ) deletarNota();
     }
     
     private void configuraBindings() {
@@ -146,8 +140,12 @@ public class NotasController implements Initializable{
 		configuraBindings();
 		initTableDisciplinas();
 		initTableNotas();
-		tableDisciplinas.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> disciplinaSelecionada(newValue));
-		tableNotas.getSelectionModel().selectedItemProperty().addListener( (observable, oldValue, newValue) -> setNotaAtual(newValue) );
+		tableDisciplinas.getSelectionModel()
+			.selectedItemProperty()
+			.addListener( (observable, oldValue, newValue) -> disciplinaSelecionada(newValue));
+		tableNotas.getSelectionModel()
+			.selectedItemProperty()
+			.addListener( (observable, oldValue, newValue) -> setNotaAtual(newValue) );
 	}
 	
 	public static void setNotaAtual(Nota notaAtual) {
@@ -155,7 +153,9 @@ public class NotasController implements Initializable{
 	}
 	private void deletarNota() {
 		if( ServiceFactory.createHistoricoDao().deleteNota(UsuarioAtual.getUsuario(), getDisciplinaAtual(), getNotaAtual()) ) {
-			Alerta.mostrar(AlertType.INFORMATION, "Sucesso", "Sucesso ao deletar a nota " + getNotaAtual() + " da disciplina "+ getDisciplinaAtual() );
+			Alerta.mostrar(AlertType.INFORMATION, "Sucesso",
+					"Sucesso ao deletar a nota " + getNotaAtual() +
+					" da disciplina "+ getDisciplinaAtual() );
 		}
 		else {
 			Alerta.mostrar(AlertType.ERROR, "Erro", "Não foi possivel deletar a nota.");
