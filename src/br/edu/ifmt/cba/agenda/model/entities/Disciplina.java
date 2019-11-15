@@ -49,7 +49,7 @@ public class Disciplina {
 		}
 		
 		Double media = soma/notas.size();
-		System.out.println(media);
+//		System.out.println(media);
 		
 		if( !media.isNaN() ) {
 			return FormatarNumero.format(media);

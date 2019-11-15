@@ -12,6 +12,8 @@ public class UsuarioAtual {
 
 	private static Aluno usuario = null;
 
+	private UsuarioAtual() {}
+	
 	public static Aluno getUsuario() {
 		return usuario;
 	}
