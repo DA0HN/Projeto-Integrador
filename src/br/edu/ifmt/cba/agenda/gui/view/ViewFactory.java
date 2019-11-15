@@ -37,5 +37,7 @@ public class ViewFactory {
 	public static AlterarNota createAlterarNota() {
 		return new AlterarNota();
 	}
-	
+	public static AlterarFaltas createAlterarFaltas() {
+		return new AlterarFaltas();
+	}
 }
