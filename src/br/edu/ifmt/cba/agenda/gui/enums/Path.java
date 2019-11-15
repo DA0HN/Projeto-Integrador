@@ -13,6 +13,7 @@ public enum Path {
 	CRIA_VINCULO("../fxml/VincularDisciplina.fxml"),
 	ADICIONAR_NOTA("../fxml/AdicionarNota.fxml"),
 	ALTERAR_NOTA("../fxml/AlterarNota.fxml"),
+	ALTERAR_FALTA("../fxml/AlterarFaltas.fxml"),
 	STYLE("../style/modena_dark.css");
 	
 	private String value;
