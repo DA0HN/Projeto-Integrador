@@ -73,6 +73,8 @@ public class PrincipalController implements Initializable{
 		this.viewController = viewController;
 	}
 
-	@Override public void initialize(URL arg0, ResourceBundle arg1) {}
+	@Override public void initialize(URL arg0, ResourceBundle arg1) {
+		trocarAnchorPane(Path.MENU_PRINCIPAL.getValue());
+	}
     
 }

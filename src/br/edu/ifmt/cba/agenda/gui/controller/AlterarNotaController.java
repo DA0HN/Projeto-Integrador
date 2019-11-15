@@ -48,7 +48,8 @@ public class AlterarNotaController implements Initializable{
     private void alterarNota() {
     	this.disciplina = NotasController.getDisciplinaAtual();	
     	if( this.disciplina == null ) {
-    		Alerta.mostrar(AlertType.ERROR, "Nenhuma disciplina selecionada", "nenhuma disciplina foi selecionada para adicionar a nova nota.");
+    		Alerta.mostrar(AlertType.ERROR, "Nenhuma disciplina selecionada",
+    				"nenhuma disciplina foi selecionada para adicionar a nova nota.");
     		fechar();
     	}
     	Double novaNota = Double.parseDouble(txNota.getText());
@@ -58,7 +59,9 @@ public class AlterarNotaController implements Initializable{
     				updateNota(UsuarioAtual.getUsuario(),
     						this.disciplina, this.nota.getId(), novaNota);
     		if( isChanged ) {
-    			Alerta.mostrar(AlertType.INFORMATION, "Sucesso", "Sucesso ao alterar a nota " + nota + " na disciplina de " + disciplina.getNome());
+    			Alerta.mostrar(AlertType.INFORMATION, "Sucesso",
+    					"Sucesso ao alterar a nota "
+    					+ nota + " na disciplina de " + disciplina.getNome());
     		}
     		else {
     			Alerta.mostrar(AlertType.ERROR, "Erro", "Não foi possivel alterar sua nota.");

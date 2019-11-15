@@ -26,28 +26,24 @@ public class AlterarFaltasController implements Initializable{
     @FXML private Button btRetirar;
     @FXML private TextField txNumeroDeFaltas;
     
-    private boolean verificaDisciplina(Disciplina disciplina) {
-    	if( disciplina == null ) {
-    		Alerta.mostrar(AlertType.ERROR, "Nenhuma disciplina selecionada", "nenhuma disciplina foi selecionada para adicionar a nova nota.");
-    		fechar();
-    		return false;
-    	}
-    	
-    	if( txNumeroDeFaltas.getText().equals("") || txNumeroDeFaltas.getText().isBlank() || txNumeroDeFaltas.getText().isEmpty()) {
-    		return false;
-    	}
-    	return true;
-    }
-    
     private void adicionarFalta() {
     	Disciplina disciplina = ListarDisciplinasController.getDisciplinaAtual();
     	
-    	if( verificaDisciplina(disciplina) ) return;
+    	if( disciplina == null ) {
+    		Alerta.mostrar(AlertType.ERROR, "Nenhuma disciplina selecionada", "nenhuma disciplina foi selecionada para adicionar a nova nota.");
+    		fechar();
+    	}
+    	
+    	if( txNumeroDeFaltas.getText().equals("") || txNumeroDeFaltas.getText().isBlank() || txNumeroDeFaltas.getText().isEmpty()) {
+    		return;
+    	}
     	
     	Integer falta = Integer.parseInt(txNumeroDeFaltas.getText());
     	
-    	if( falta > disciplina.getNumeroDeAulas() ) {
-    		Alerta.mostrar(AlertType.ERROR, "O número de faltas inserido não é válido", "O número de faltas inserido é maior que o número de aulas.");
+    	if( falta > disciplina.getNumeroDeAulas() 
+    			|| falta+disciplina.getFaltas() > disciplina.getNumeroDeAulas()) {
+    		Alerta.mostrar(AlertType.ERROR, "O número de faltas inserido não é válido",
+    				"O número de faltas inserido é maior que o número de aulas.");
     		return;
     	}
     	
@@ -56,10 +52,13 @@ public class AlterarFaltasController implements Initializable{
     			.saveFalta(UsuarioAtual.getUsuario(), disciplina, falta);
     	
     	if( isSave ) {
-			Alerta.mostrar(AlertType.INFORMATION, "Sucesso", "Sucesso ao salvar a falta " + falta + " na disciplina de " + disciplina.getNome());
+			Alerta.mostrar(AlertType.INFORMATION, "Sucesso",
+					"Sucesso ao salvar a falta " + falta +
+					" na disciplina de " + disciplina.getNome());
 		}
 		else {
-			Alerta.mostrar(AlertType.ERROR, "Erro", "Não foi possivel salvar sua falta.");
+			Alerta.mostrar(AlertType.ERROR, "Erro",
+					"Não foi possivel salvar sua falta.");
 		}
     	atualizaViewListarDisciplinas();
     	fechar();
@@ -67,22 +66,33 @@ public class AlterarFaltasController implements Initializable{
     
     private void retirarFalta() {
     	Disciplina disciplina = ListarDisciplinasController.getDisciplinaAtual();
-    	if (verificaDisciplina(disciplina)) {
-			return;
-		}
+    	if( disciplina == null ) {
+    		Alerta.mostrar(AlertType.ERROR, "Nenhuma disciplina selecionada",
+    				"nenhuma disciplina foi selecionada para adicionar a nova nota.");
+    		fechar();
+    	}
+    	
+    	if( txNumeroDeFaltas.getText().equals("") || txNumeroDeFaltas.getText().isBlank() || txNumeroDeFaltas.getText().isEmpty()) {
+    		return;
+    	}
     	Integer faltasRetiradas = Integer.parseInt(txNumeroDeFaltas.getText());
-    	if( faltasRetiradas > disciplina.getFaltas() ) {
-    		Alerta.mostrar(AlertType.ERROR, "O número de faltas inserido não é válido", "O número de faltas inserido é maior que o número de faltas.");
+    	if( faltasRetiradas > disciplina.getFaltas() 
+    			|| disciplina.getFaltas() - faltasRetiradas < 0 ) {
+    		Alerta.mostrar(AlertType.ERROR, "O número de faltas inserido não é válido",
+    				"O número de faltas inserido é maior que o número de faltas.");
     		return;
     	}
     	boolean isSave = ServiceFactory
     			.createHistoricoDao()
     			.deleteFalta(UsuarioAtual.getUsuario(), disciplina, faltasRetiradas);
     	if( isSave ) {
-			Alerta.mostrar(AlertType.INFORMATION, "Sucesso", "Sucesso ao retirar " + faltasRetiradas + " da disciplina de " + disciplina.getNome());
+			Alerta.mostrar(AlertType.INFORMATION, "Sucesso",
+					"Sucesso ao retirar " + faltasRetiradas +
+					" da disciplina de " + disciplina.getNome());
 		}
 		else {
-			Alerta.mostrar(AlertType.ERROR, "Erro", "Não foi possivel retirar sua falta.");
+			Alerta.mostrar(AlertType.ERROR, "Erro",
+					"Não foi possivel retirar sua falta.");
 		}
     	atualizaViewListarDisciplinas();
     	fechar();
