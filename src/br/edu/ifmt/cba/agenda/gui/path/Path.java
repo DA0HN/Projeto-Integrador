@@ -1,4 +1,4 @@
-package br.edu.ifmt.cba.agenda.gui.enums;
+package br.edu.ifmt.cba.agenda.gui.path;
 
 public enum Path {
 
@@ -14,8 +14,8 @@ public enum Path {
 	ADICIONAR_NOTA("../fxml/AdicionarNota.fxml"),
 	ALTERAR_NOTA("../fxml/AlterarNota.fxml"),
 	ALTERAR_FALTA("../fxml/AlterarFaltas.fxml"),
+	ICON("../images/ifmt_logo.png"),
 	STYLE("../style/modena_dark.css");
-	
 	private String value;
 	
 	Path(String value){

@@ -51,7 +51,7 @@ public class CriaContaController implements Initializable {
     }
     
     @FXML void textFieldHasEnterPressed(KeyEvent event) {
-    	if( ButtonEvent.hasUserConfirmed(event) ) {
+    	if( ButtonEvent.hasEnterPressed(event) ) {
     		getData();
     	}
     }
@@ -64,7 +64,9 @@ public class CriaContaController implements Initializable {
     		String senha = psSenha.getText();
     		String senhaConfirm = psConfirm.getText();
     		
-    		if( verificaDados(nome) && verificaDados(email) && verificaDados(matricula) && verificaDados(senha) && verificaDados(senhaConfirm) ) {
+    		if( verificaDados(nome) && verificaDados(email) 
+    				&& verificaDados(matricula) && verificaDados(senha) && verificaDados(senhaConfirm) ) {
+    			
     			if( !senha.equals(senhaConfirm) ) {
         			throw new IllegalStateException("Senha inválida, por favor digite novamente.");
         		}

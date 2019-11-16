@@ -3,6 +3,7 @@ package br.edu.ifmt.cba.agenda.gui.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.edu.ifmt.cba.agenda.gui.utils.Alerta;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.model.entities.Disciplina;
 import br.edu.ifmt.cba.agenda.model.repository.ServiceFactory;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -46,7 +48,7 @@ public class CadastrarDisciplinaController implements Initializable{
     }
 
     @FXML void textFieldHasEnterPressed(KeyEvent event) {
-    	if( ButtonEvent.hasUserConfirmed(event) ) {
+    	if( ButtonEvent.hasEnterPressed(event) ) {
     		cadastrarNovaDisciplina();
     	}
     }
@@ -62,11 +64,28 @@ public class CadastrarDisciplinaController implements Initializable{
     	String nomeProfessor = txNomeProfessor.getText();
     	Integer numeroAulas = Integer.parseInt(txNumeroAulas.getText());	
     	
-    	var disciplina = new Disciplina(nomeDisciplina, nomeProfessor, numeroAulas);
-    	ServiceFactory.createDisciplinaDao().save(disciplina);
-    	
+    	if( verificaDados(nomeDisciplina) && verificaDados(nomeProfessor) && numeroAulas > 0) {
+    		var disciplina = new Disciplina(nomeDisciplina, nomeProfessor, numeroAulas);
+    		boolean isSave = ServiceFactory.createDisciplinaDao().save(disciplina);
+    		if( isSave ) {
+    			Alerta.mostrar(AlertType.INFORMATION, "Sucesso", "Sucesso ao criar nova disciplina.");
+    		}
+    		else {
+    			Alerta.mostrar(AlertType.ERROR, "Ocorreu um erro",
+    					"não foi possível criar uma nova disciplina.");
+    		}
+    		limparTextField();
+    		
+    	}
+    	else {
+    		Alerta.mostrar(AlertType.ERROR, "Os dados inseridos não são válidos",
+    				"Os dados não foram inseridos corretamente.");
+    		return;
+    	}
     }
-    
+    private boolean verificaDados(String str) {
+    	return !(str.isBlank() || str.isEmpty());
+    }
 	@Override public void initialize(URL arg0, ResourceBundle arg1) {}
 
 }

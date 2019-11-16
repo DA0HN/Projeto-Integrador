@@ -41,7 +41,7 @@ public class DisciplinaService implements DisciplinaDatabase {
 		this.conexao = conexao;
 	}
 
-	@Override public void save(Disciplina d) {
+	@Override public boolean save(Disciplina d) {
 		PreparedStatement st = null;
 		try {
 			st = conexao.prepareStatement(DisciplinaSQL.SAVE.getValue(), Statement.RETURN_GENERATED_KEYS);
@@ -59,8 +59,9 @@ public class DisciplinaService implements DisciplinaDatabase {
 					d.setId(id);
 				}
 				Database.closeResultSet(rs);
+				return true;
 			}
-			
+			return false;
 		}
 		catch( SQLException e) {
 			throw new DatabaseException("Erro ao executar Save -> " + e.getMessage() );

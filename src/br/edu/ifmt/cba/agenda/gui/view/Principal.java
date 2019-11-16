@@ -3,12 +3,13 @@ package br.edu.ifmt.cba.agenda.gui.view;
 import java.io.IOException;
 
 import br.edu.ifmt.cba.agenda.gui.controller.PrincipalController;
-import br.edu.ifmt.cba.agenda.gui.enums.Path;
 import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
+import br.edu.ifmt.cba.agenda.gui.path.Path;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Principal extends Application{

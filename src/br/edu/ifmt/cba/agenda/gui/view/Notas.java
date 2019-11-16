@@ -3,7 +3,7 @@ package br.edu.ifmt.cba.agenda.gui.view;
 import java.io.IOException;
 
 import br.edu.ifmt.cba.agenda.gui.controller.NotasController;
-import br.edu.ifmt.cba.agenda.gui.enums.Path;
+import br.edu.ifmt.cba.agenda.gui.path.Path;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

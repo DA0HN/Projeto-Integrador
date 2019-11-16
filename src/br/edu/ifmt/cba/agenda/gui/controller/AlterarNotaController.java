@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.edu.ifmt.cba.agenda.gui.constraints.Constraints;
-import br.edu.ifmt.cba.agenda.gui.enums.Path;
+import br.edu.ifmt.cba.agenda.gui.path.Path;
 import br.edu.ifmt.cba.agenda.gui.utils.Alerta;
 import br.edu.ifmt.cba.agenda.gui.utils.ButtonEvent;
 import br.edu.ifmt.cba.agenda.gui.view.AlterarNota;

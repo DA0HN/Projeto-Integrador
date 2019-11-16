@@ -10,9 +10,9 @@ public class ButtonEvent {
 	}
 	
 	public static boolean hasEnterPressed(KeyEvent event) {
-		return (event.getCode() == KeyCode.SPACE);
+		return (event.getCode() == KeyCode.ENTER);
 	}
 	public static boolean hasSpacePressed(KeyEvent event) {
-		return (event.getCode() == KeyCode.ENTER);
+		return (event.getCode() == KeyCode.SPACE);
 	}
 }

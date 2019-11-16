@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.edu.ifmt.cba.agenda.gui.enums.Path;
 import br.edu.ifmt.cba.agenda.gui.exceptions.ViewException;
+import br.edu.ifmt.cba.agenda.gui.path.Path;
 import br.edu.ifmt.cba.agenda.gui.view.Login;
 import br.edu.ifmt.cba.agenda.gui.view.Principal;
 import br.edu.ifmt.cba.agenda.gui.view.ViewFactory;
